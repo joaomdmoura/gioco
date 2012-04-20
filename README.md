@@ -1,5 +1,5 @@
 ![Alt text](http://joaomdmoura.github.com/gioco/assets/images/logo.png "A Sweet Language")
-# Gioco (current version - 0.0.1)
+# Gioco (current version - 0.0.0)
 A **gamification** gem to Ruby applications
 
 Description
