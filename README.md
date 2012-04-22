@@ -35,14 +35,14 @@ or
 rails g gioco:setup MODEL_NAME;
 ```
 
-The optional ``` --points ``` argument is to setup using points logic with the levels and badges. You can read more about how the badge, level and points implementation work at the [Documentation](http://rubygems.org/gems/sweet-lang)
+The optional ``` --points ``` argument will setup the gioco with a points system. You can read more about how the badge, level and points implementation work at the [Documentation](http://rubygems.org/gems/sweet-lang)
 
 
 Usage
 ------------
 
-###Badges
-After setup gioco with you application you are able to add or remove Badges as you want to using the following commands:
+###Badge
+After setup gioco with you application you are able to add or remove Badges as you want using the following commands:
 
 Now you are able to add Badges using:
 
