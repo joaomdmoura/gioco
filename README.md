@@ -44,7 +44,7 @@ Usage
 ###Badge
 After setup gioco with you application you are able to add or remove Badges as you want using the following commands:
 
-Now you are able to add Badges using:
+To add Badges using:
 
 ```
 	rake gioco:add_badge[BADGE_NAME,POINTS,DEFAULT]
