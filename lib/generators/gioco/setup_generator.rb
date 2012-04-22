@@ -27,15 +27,6 @@ module Gioco
 			add_relationship( "level", "badge", "belongs_to" )
 		end
 
-		def migrating
-			puts <<-EOS
-=======================================
-> Now is time to run rake db:migrate
-=======================================
-			EOS
-			rake("db:migrate")
-		end
-
 		def create_rakes
 			rakefile("gioco.rake") do
 				<<-EOS
@@ -83,14 +74,42 @@ namespace :gioco do
 	end
 
 end
-
 				EOS
 			end
 		end
 
+		def migrating
+			puts <<-EOS
+
+=======================================
+> Now is time to run rake db:migrate
+=======================================
+
+			EOS
+			rake("db:migrate")
+		end
+
 		def instructions
 			puts <<-EOS
-LOL
+
+=======================================================
+
+Gioco successfully installed.
+
+Now you are able to add Badges using:
+	rake gioco:add_badge[BADGE_NAME,POINTS,DEFAULT]
+
+If you installed gioco without points option:
+	rake gioco:add_badge[BADGE_NAME,DEFAULT]
+
+And to remove Badges using:
+	rake gioco:remove_badge[BADGE_NAME]
+
+For usage and more infomation go to the documentation:
+http://www.joaomdmoura.com/
+
+=======================================================
+
 			EOS
 		end
 		

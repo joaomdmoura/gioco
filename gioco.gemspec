@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = 'gioco'
   s.version     = File.read(File.dirname(__FILE__) + '/VERSION').strip
-  s.date        = '2012-04-20'
+  s.date        = '2012-04-23'
   s.summary     = "A gamification gem to Ruby on Rails applications."
   s.description = "A gamification gem to Ruby on Rails applications."
   s.authors     = ["João Moura"]
