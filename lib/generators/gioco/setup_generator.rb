@@ -1,7 +1,7 @@
 module Gioco
 
 	class SetupGenerator < Rails::Generators::NamedBase
-		source_root File.expand_path("../templates", __FILE__)
+		source_root File.expand_path("../../templates", __FILE__)
 		
 		desc "Setup Gioco for some resource"
 		class_option :points, :type => :boolean, :default => false, :desc => "Setup gioco with points-system based"
@@ -10,6 +10,10 @@ module Gioco
 			generate("model", "badge name:string #{(options[:points]) ? "points:integer" : ""} default:boolean")
 			generate("model", "level badge_id:integer #{file_name}_id:integer")
 			generate("migration", "add_points_to_#{file_name.pluralize} points:integer") if options[:points]
+		end
+
+		def creating_templates
+			template "gioco.rb", "config/initializers/gioco.rb"
 		end
 
 		def setup_relations
@@ -54,7 +58,7 @@ namespace :gioco do
 													})
 			
 			if args.default
-				resources = User.find(:all)
+				resources = #{file_name.capitalize}.find(:all)
 				resources.each do |r|
 					r.badges << badge
 				end

@@ -1,0 +1,1 @@
+Gioco::Resources::NAME = "<%= file_name %>"
