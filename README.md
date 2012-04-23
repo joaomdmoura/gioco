@@ -62,7 +62,7 @@ And to remove Badges use:
 	rake gioco:remove_badge[BADGE_NAME]
 ```
 
-The boolean DEFAULT option is responsible to add to all your current registrations the specified badge.
+The boolean DEFAULT option is responsible to add a specific badge to all your current resources registrations.
 
 ###Methods
 
