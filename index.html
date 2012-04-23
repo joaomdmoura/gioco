@@ -19,7 +19,7 @@
 			</div>
 
 			<div id="block1" class="block" >
-				Gioco is a easy-to-implement 
+				Gioco is a easy to implement 
 				gamification gem based on plug 
 				and play concept. 
 			</div>
@@ -27,8 +27,8 @@
 			<div id="block2" class="block" >
 				Dosen't matter if you already 
 				have a full and functional 
-				database, Gioco will smoothly 
-				integrate everything and 
+				database, Gioco will <br />smoothly 
+				integrate<br /> everything and 
 				provide all methods that you 
 				might need.
 			</div>
@@ -41,9 +41,69 @@
 
 			<div id="down">
 				<div id="documentation">
+					
 					<span class="title">Documentation</span>
 					<br /><br />
-					...
+					
+					<span class="subtitle">Concept</span>
+					<br />
+					Gioco was built with a <span class="highlight">Badge, Level and Points</span> concept to reach the majority of gamifications implementation. The <span class="highlight">Points</span> are optinal but can be very usefull.<br />
+					The basic logic is, that a <span class="highlight">Resource</span> ( eg. User ) have <span class="highlight">Points</span> and when this Resource get determined Points it can win or lose a <span class="highlight">Level</span>, connecting or disconnecting the Resource with a <span class="highlight">Badge</span> ( getting a badge through a level ).<br />
+					But <span class="highlight">Points</span> are optional, so, if you dont wanna register Points, all you gonna do will be add and remove <span class="highlight">Badges</span> as your logic requires ( through a level ).
+					<br /><br />
+
+					<span class="subtitle">Install and Setup</span>
+					<br />
+					Gioco is avaible through Rubygems, to install add the gioco in your gemfile:<br />
+					<div class="code">gem 'gioco'</div>
+					and run the bundler:<br />
+					<div class="code">> bundle install</div>
+					<br />
+
+					After install gioco you're gonna have to setup it, the <span class="highlight">MODEL_NAME</span> should be replaced for the model you want to be, as gioco treat, the resource of the gamification. (eg. user )<br />
+					<div class="code">rails g gioco:setup MODEL_NAME --points;</div>
+					or<br />
+					<div class="code">rails g gioco:setup MODEL_NAME;</div>
+					The optional <span class="highlight">--points</span> argument will setup the gioco with a points system explained at the <span class="highlight">Concept</span>
+					<br /><br />
+
+					<span class="subtitle">Badges Managment</span>
+					<br />
+					The badges are managed through <span class="highlight">Rake tasks</span>, enabling you to add and remove badges as you need:<br /><br/>
+					To add Badges use:<br />
+					<div class="code">rake gioco:add_badge[BADGE_NAME,POINTS,DEFAULT]</div>
+					Or if you installed gioco without points option:<br />
+					<div class="code">rake gioco:add_badge[BADGE_NAME,DEFAULT]</div>
+					And to remove Badges use:<br />
+					<div class="code">rake gioco:remove_badge[BADGE_NAME]</div>
+					The boolean <span class="highlight">DEFAULT</span> option is responsible to add a specific badge to all your current resources registrations.
+					<br/><br />
+
+					<span class="subtitle">Methods</span>
+					<br />
+					<span class="highlight">Gioco</span> provides you some methods to use inside of the application that will allow you to easy implement your gamification logic.<br/><br/>
+					
+					<span class="subtitle2">Resource</span><br/>
+					
+					<span class="highlight">Change Points</span>
+					<div class="code">Gioco::Resources.change_points( Resource_id, Points, Resource_obj[optional] )</div>
+					This method only is usefull when you setup the Gioco with the points system. The Resource_obj is an optional argument that can be use to avoid useless queries on database, so instead of pass a Resource_id you can pass it as nil and the resource obeject at the last parameter.<br /><br />
+
+					<span class="subtitle2">Badges</span><br/>
+					
+					<span class="highlight">Add</span>
+					<div class="code">Gioco::Badge.add( Resource_id, Badge_id, Resource_obj[optional], Badge_obj[optional] )</div>
+					The Badge.add method is responsable to add a specific badge to some resource, again, the Resource_obj and the Badge_obj are optinal arguments that can be use to avoid useless queries on database, so instead of pass a Resource_id and Badge_id you can pass it as nil and the resource and badge obejects at the lasts parameters.<br/><br />
+
+					<span class="highlight">Remove</span>
+					<div class="code">Gioco::Badge.remove( Resource_id, Badge_id, Resource_obj[optional], Badge_obj[optional] )</div>
+					The Badge.remove method is used to remove a badge of a resource, the Resource_obj and the Badge_obj follow the same logic of the others optional arguments of the <span class="highlight">Add</span> method.<br/><br />
+
+					<span class="subtitle">Application</span>
+					<br />
+					Inside your application you might have to get the <span class="highlight">Badges</span> and <span class="highlight">Levels</span> data. And you are able to do this using (replace <span class="highlight">RESOURCE_NAME<span> for your resource model name) :<br/>
+					<div class="code">RESOURCE_NAME.badges<br/>RESOURCE_NAME.levels</div>
+
 				</div>
 			</div>
 

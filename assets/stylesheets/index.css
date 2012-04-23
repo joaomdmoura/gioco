@@ -15,6 +15,8 @@ body {
 	position: relative;
 	top: -170px;
 	left: 320px;
+	width: 470px;
+	height: 401px;
 }
 #block1 {
 	color: #5f5e5d;
@@ -39,6 +41,8 @@ body {
 	position: relative;
 	top: -505px;
 	left: 700px;
+	width: 260px;
+	height: 80px;
 }
 #down {
 	background-image: url("../images/down_bg.png");
@@ -54,7 +58,7 @@ body {
 	margin: 0 auto;
 	width: 900px;
 	padding-top:30px;
-	font-size: 16px;
+	font-size: 14px;
 	color: #fff;	
 	line-height: 30px;
 	margin-bottom: 50px;
@@ -62,4 +66,31 @@ body {
 .title {
 	font-size: 36px;
 	font-weight: bold;
+}
+.subtitle {
+	font-size: 24px;
+	font-weight: bold;
+}
+.subtitle2 {
+	font-size: 18px;
+	font-weight: bold;
+}
+.highlight {
+	color: #fbad9f;
+}
+.code {
+	position: relative;
+	background: #efeeee;
+	border: 1px solid #932b16;
+	-moz-box-shadow:    inset 0 0 12px #999;
+  -webkit-box-shadow: inset 0 0 12px #999;
+  box-shadow:         inset 0 0 12px #999;
+	zoom: 1;
+	padding: 10px;
+	min-width:630px;
+	max-width:830px;
+	font-size: 13px !important;
+	line-height: 21px !important;
+	color: #de4c2f !important;
+	font-family: 'Terminal', 'Courier New', monospace !important;
 }
