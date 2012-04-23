@@ -98,6 +98,39 @@ RESOURCE_NAME.levels
 ```
 
 
+Example
+------------
+All basic usage flow to add gioco in an application using User as resource:
+
+```
+> rails g gioco:setup user --points;
+...
+
+> rake gioco:add_badge[noob,0,true]
+> rake gioco:add_badge[medium,100]
+> rake gioco:add_badge[hard,100]
+> rake gioco:add_badge[pro,100]
+```
+
+Now the gioco is already installed and synced with the applciation and four badges are created.
+
+The default badge ( noob ) already was added to all users that arelady have some register in database.
+
+Inside you application if we wanna give 100 points to users that get to this method, all we have to do is use the follow method already showed:
+
+```
+Gioco::Resources.change_points( current_user.id, 100 )
+```
+
+Or if you wanna add or remove some badge, consequently adding or removing the necessary points:
+
+```
+Gioco::Badge.add( current_user.id , 2 )
+
+Gioco::Badge.remove( current_user.id , 2 )
+```
+
+
 This is it!
 ------------
 Well, this is **Gioco** I really hope you enjoy and use it a lot, I'm still working on it so dont be shy, let me know
