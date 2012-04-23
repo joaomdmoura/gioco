@@ -35,7 +35,7 @@ or
 rails g gioco:setup MODEL_NAME;
 ```
 
-The optional ``` --points ``` argument will setup the gioco with a points system. You can read more about how the badge, level and points implementation work at the [Documentation](http://rubygems.org/gems/sweet-lang)
+The optional ``` --points ``` argument will setup the gioco with a points system. You can read more about how the badge, level and points implementation work at the [Documentation](http://joaomdmoura.github.com/gioco/)
 
 
 Usage
