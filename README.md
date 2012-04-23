@@ -6,7 +6,7 @@ Description
 ------------
 Gioco is a easy-to-implement gamification gem based on plug and play concept.
 With Gioco you are able to implement any logic you could have with a badge, level and points implementation.
-Dosen't matter if you already have a full-functional database, Gioco will smoothly integrate everything you need and provide the all methods that you might need.
+Dosen't matter if you already have a full and functional database, Gioco will smoothly integrate everything and provide all methods that you might need.
 For more information just keep reading.
 
 
@@ -35,34 +35,34 @@ or
 rails g gioco:setup MODEL_NAME;
 ```
 
-The optional ``` --points ``` argument is to setup using points logic with the levels and badges. You can read more about how the badge, level and points implementation work at the [Documentation](http://rubygems.org/gems/sweet-lang)
+The optional ``` --points ``` argument will setup the gioco with a points system. You can read more about how the badge, level and points implementation work at the [Documentation](http://rubygems.org/gems/sweet-lang)
 
 
 Usage
 ------------
 
-###Badges
-After setup gioco with you application you are able to add or remove Badges as you want to using the following commands:
+###Badge
+After setup gioco with you application you are able to add or remove Badges as you want using the following commands:
 
-Now you are able to add Badges using:
+To add Badges use:
 
 ```
 	rake gioco:add_badge[BADGE_NAME,POINTS,DEFAULT]
 ```
 
-If you installed gioco without points option:
+Or if you installed gioco without points option:
 
 ```
 	rake gioco:add_badge[BADGE_NAME,DEFAULT]
 ```
 
-And to remove Badges using:
+And to remove Badges use:
 
 ```
 	rake gioco:remove_badge[BADGE_NAME]
 ```
 
-The boolean DEFAULT option is responsible to add to all your current registrations the specified badge.
+The boolean DEFAULT option is responsible to add a specific badge to all your current resources registrations.
 
 ###Methods
 
