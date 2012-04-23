@@ -1,0 +1,65 @@
+body {
+	margin: 0;
+	font-family: 'Bitter', serif;
+}
+#content {
+	margin: 0 auto;
+	width: 1024px;
+	height: 100%;
+	text-align center;
+}
+#logo {
+	margin: 30px;
+}
+#way {
+	position: relative;
+	top: -170px;
+	left: 320px;
+}
+#block1 {
+	color: #5f5e5d;
+	text-align: left;
+	top: -370px;
+	left: 60px;
+}
+#block2 {
+	color: #b4b2ad;
+	text-align: right;
+	top: -655px;
+	left: 680px;
+}
+.block{
+	width: 285px;
+	font-weight: bold;
+	font-size: 18px;
+	position: relative;
+	line-height: 30px;
+}
+#download {
+	position: relative;
+	top: -505px;
+	left: 700px;
+}
+#down {
+	background-image: url("../images/down_bg.png");
+	background-repeat: repeat-x;
+	background-color: #DE4C2F;
+	width: 100%;
+	top:560px;
+	left: 0;
+	position: absolute;
+}
+#documentation {
+	text-align: left;
+	margin: 0 auto;
+	width: 900px;
+	padding-top:30px;
+	font-size: 16px;
+	color: #fff;	
+	line-height: 30px;
+	margin-bottom: 50px;
+}
+.title {
+	font-size: 36px;
+	font-weight: bold;
+}
