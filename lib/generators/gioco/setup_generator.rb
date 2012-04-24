@@ -13,11 +13,12 @@ module Gioco
 		end
 
 		def creating_templates
+			@points = ( options[:points] ) ? true : false
 			template "gioco.rb", "config/initializers/gioco.rb"
 		end
 
 		def setup_relations
-			add_relationship( "badge", "levels", "has_many" )
+			add_relationship( "badge", "levels", "has_many", false, "destroy" )
 			add_relationship( "badge", file_name.pluralize, "has_many", "levels" )
 			
 			add_relationship( file_name, "levels", "has_many" )
@@ -106,7 +107,7 @@ And to remove Badges using:
 	rake gioco:remove_badge[BADGE_NAME]
 
 For usage and more infomation go to the documentation:
-http://www.joaomdmoura.com/
+http://joaomdmoura.github.com/gioco/
 
 =======================================================
 
@@ -115,9 +116,9 @@ http://www.joaomdmoura.com/
 		
 		private
 
-		def add_relationship ( model, related, relation, through = false )
+		def add_relationship ( model, related, relation, through = false, dependent = false )
 			gsub_file "app/models/#{model}.rb", get_class_header(model), "#{get_class_header(model)}
-			#{relation} :#{related} #{(through) ? ", :through => :#{through}" : ""} "
+			#{relation} :#{related} #{(through) ? ", :through => :#{through}" : ""} #{(dependent) ? ", :dependent => :#{dependent}" : ""}"
 		end
 
 		def get_class_header ( model_name )

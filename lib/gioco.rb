@@ -54,6 +54,7 @@ module Gioco
 			resource 	= get_resource( rid ) if !resource
 			badge 		= get_badge( badge_id ) if !badge
 
+			resource.update_attributes( {:points => badge.points } ) if Gioco::Resources::POINTS && badge.points > resource.points.to_i
 			resource.badges << badge if !resource.badges.include?(badge)
 		end
 
