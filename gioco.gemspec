@@ -3,10 +3,9 @@ Gem::Specification.new do |s|
   s.version     = File.read(File.dirname(__FILE__) + '/VERSION').strip
   s.date        = '2012-04-23'
   s.summary     = "A gamification gem to Ruby on Rails applications."
-  s.description = "A gamification gem to Ruby on Rails applications."
+  s.description = "Gioco is a easy to implement gamification gem based on plug and play concept.Dosen't matter if you already have a full and functional database, Gioco will smoothly integrateeverything and provide all methods that you might need."
   s.authors     = ["João Moura"]
   s.email       = 'joaomdmoura@gmail.com'
   s.files       = Dir[ 'lib/*', 'lib/**/*', 'lib/**/**/*', 'init.rb' ]
   s.homepage    = 'http://joaomdmoura.github.com/gioco/'
-  s.add_development_dependency "cucumber"
 end
