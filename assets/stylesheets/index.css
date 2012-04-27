@@ -23,6 +23,7 @@ body {
 	text-align: left;
 	top: -370px;
 	left: 60px;
+    width: 270px;
 }
 #block2 {
 	color: #b4b2ad;
@@ -59,7 +60,7 @@ body {
 	width: 900px;
 	padding-top:30px;
 	font-size: 14px;
-	color: #fff;	
+	color: #fff;
 	line-height: 30px;
 	margin-bottom: 50px;
 }
