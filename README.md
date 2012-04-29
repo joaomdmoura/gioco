@@ -1,4 +1,4 @@
-
+![Alt text](http://joaomdmoura.github.com/gioco/assets/images/logo.png "A gamification gem to Ruby on Rails applications")
 # Gioco (current version - 0.1.0)
 A **gamification** gem to Ruby on Rails applications
 
