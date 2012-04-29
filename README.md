@@ -130,6 +130,10 @@ Gioco::Badge.add( current_user.id , 2 )
 Gioco::Badge.remove( current_user.id , 2 )
 ```
 
+License
+------------
+Gioco is released under the MIT license:
+www.opensource.org/licenses/MIT
 
 This is it!
 ------------
