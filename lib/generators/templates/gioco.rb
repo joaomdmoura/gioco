@@ -1,2 +1,2 @@
-Gioco::Resources::NAME = "<%= file_name %>"
-Gioco::Resources::POINTS = <%= @points %>
+Gioco::Core::RESOURCE_NAME = "<%= file_name %>"
+Gioco::Core::POINTS = <%= @points %>
