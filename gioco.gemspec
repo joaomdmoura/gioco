@@ -1,4 +1,5 @@
 Gem::Specification.new do |s|
+
   s.name        = 'gioco'
   s.version     = File.read(File.dirname(__FILE__) + '/VERSION').strip
   s.date        = '2012-04-25'
@@ -8,4 +9,10 @@ Gem::Specification.new do |s|
   s.email       = 'joaomdmoura@gmail.com'
   s.files       = Dir[ 'lib/*', 'lib/**/*', 'lib/**/**/*', 'init.rb' ]
   s.homepage    = 'http://joaomdmoura.github.com/gioco/'
+  s.has_rdoc 		= false
+  s.test_files 	= Dir['test/**/*_test.rb']
+
+  s.add_dependency	'rails', '>= 3.0.0'
+  s.add_dependency	'activerecord', '>= 3.0.0'
+
 end
