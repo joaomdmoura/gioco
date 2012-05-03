@@ -10,10 +10,6 @@ module Gioco
       Badge.find( bid )
     end
 
-    def self.get_level( rid, bid )
-      Level.where( "#{RESOURCE_NAME}_id = #{rid} AND badge_id = #{bid}" )[0]
-    end
-
     def self.ranking
 
       if POINTS
@@ -33,32 +29,28 @@ module Gioco
 
     end
 
-  end
+    def self.sync_resource_by_points( resource, points )
 
-  class Resources < Core
-
-    def self.change_points( rid, points, resource = false )
-      resource        = get_resource( rid ) if !resource
-      new_pontuation  = resource.points.to_i + points
       old_pontuation  = resource.points.to_i
-      status          = nil
 
-      resource.update_attributes( {:points => new_pontuation } )
+      related_badges  = Badge.where( ( old_pontuation < points ) ? "points <= #{points}" : "points > #{points} AND points <= #{old_pontuation}" )
 
-      if old_pontuation < new_pontuation
+      Badge.transaction do
 
-        related_badges  = Badge.where( "points <= #{new_pontuation}" )
-
-        related_badges.each do |badge|
-          Badges.add( nil, nil, resource, badge )
-        end
-      
-      else
-
-        related_badges  = Badge.where( "points > #{new_pontuation} AND points <= #{old_pontuation}" )
+        resource.update_attributes( {:points => points } )
 
         related_badges.each do |badge|
-          Badges.remove( resource.id, badge.id )
+
+          if old_pontuation < points
+
+            resource.badges << badge if !resource.badges.include?(badge)
+
+          elsif old_pontuation > points
+
+            resource.levels.where( :badge_id => badge.id )[0].destroy
+
+          end
+
         end
 
       end
@@ -67,19 +59,52 @@ module Gioco
 
   end
 
+  class Resources < Core
+
+    def self.change_points( rid, points, resource = false )
+      
+      resource        = get_resource( rid ) if !resource
+      new_pontuation  = resource.points.to_i + points
+
+      sync_resource_by_points( resource, new_pontuation )
+
+    end
+
+  end
+
   class Badges < Core
 
     def self.add( rid, badge_id, resource = false, badge = false )
-      resource  = get_resource( rid ) if !resource
-      badge     = get_badge( badge_id ) if !badge
+      resource        = get_resource( rid ) if !resource
+      badge           = get_badge( badge_id ) if !badge
 
-      Resources.change_points( nil, badge.points, resource ) if POINTS && badge.points > resource.points.to_i
-      resource.badges << badge if !resource.badges.include?(badge)
+      if POINTS && !resource.badges.include?(badge)
+
+        sync_resource_by_points( resource, badge.points )
+
+      elsif !resource.badges.include?(badge)
+
+        resource.badges << badge
+
+      end
+
     end
 
     def self.remove( rid, badge_id, resource = false, badge = false )
-      level = get_level( rid, badge_id )
-      level.destroy
+      
+      resource  = get_resource( rid ) if !resource
+      badge     = get_badge( badge_id ) if !badge
+
+      if POINTS && resource.badges.include?(badge)
+
+        sync_resource_by_points( resource, Badge.where( "points < #{badge.points}" )[0].points  )
+
+      elsif resource.badges.include?(badge)      
+      
+        resource.levels.where( :badge_id => badge.id )[0].destroy
+
+      end
+
     end
 
   end
