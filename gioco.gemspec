@@ -12,7 +12,4 @@ Gem::Specification.new do |s|
   s.has_rdoc 		= false
   s.test_files 	= Dir['test/**/*_test.rb']
 
-  s.add_dependency	'rails', '>= 3.0.0'
-  s.add_dependency	'activerecord', '>= 3.0.0'
-
 end
