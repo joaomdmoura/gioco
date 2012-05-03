@@ -125,8 +125,8 @@ All basic usage flow to add gioco in an application using User as resource:
 
 > rake gioco:add_badge[noob,0,true]
 > rake gioco:add_badge[medium,100]
-> rake gioco:add_badge[hard,100]
-> rake gioco:add_badge[pro,100]
+> rake gioco:add_badge[hard,200]
+> rake gioco:add_badge[pro,500]
 ```
 
 Now the gioco is already installed and synced with the applciation and four badges are created.
