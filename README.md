@@ -1,5 +1,5 @@
-![Alt text](http://joaomdmoura.github.com/gioco/assets/images/logo.png "A gamification gem for Ruby on Rails applications")
-# Gioco (current version - 0.1.0)
+![Alt text](http://joaomdmoura.github.com/gioco/assets/images/new_logo.png "A gamification gem for Ruby on Rails applications")
+# Gioco (current version - 0.1.7)
 A **gamification** gem to Ruby on Rails applications
 
 Description
@@ -13,9 +13,16 @@ For more information just keep reading.
 Installation
 ------------
 Gioco is available through [Rubygems](http://rubygems.org/gems/gioco) and can be installed via:
-
 ```
 $ gem install gioco
+```
+Or adding it in Gemfile
+```
+gem 'gioco'
+```
+and running the bundler
+```
+$ bundle install
 ```
 
 
@@ -90,6 +97,16 @@ The Badge.remove method is used to remove a badge of a resource, the ``` Resourc
 Gioco::Badge.remove( Resource_id, Badge_id, Resource_obj[optional], Badge_obj[optional] )
 ```
 
+###Ranking
+
+Gioco provide a method to list all Resources in a ranking inside of an array:
+
+```
+Gioco::Core.ranking
+```
+
+###Get Badged and Levels
+
 To get the badges or levels of you resource all you have to do is: (replace RESOURCE_NAME for your resource model name)
 
 ```
@@ -128,6 +145,12 @@ Or if you wanna add or remove some badge, consequently adding or removing the ne
 Gioco::Badge.add( current_user.id , 2 )
 
 Gioco::Badge.remove( current_user.id , 2 )
+```
+
+To get a ranking of all resources all you need is call:
+
+```
+Gioco:Core:ranking
 ```
 
 License
