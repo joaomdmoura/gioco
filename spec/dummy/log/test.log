@@ -1,0 +1,176 @@
+  [1m[36m (0.1ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (1.3ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("schema_migrations")[0m
+  [1m[35m (1.2ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.2ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (2.1ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("schema_migrations")[0m
+  [1m[35m (1.4ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateUsers (20120505060729)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "email" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120505060729')
+  [1m[36m (1.2ms)[0m  [1mcommit transaction[0m
+Migrating to CreateBadges (20120505060735)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "badges" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "points" integer, "default" boolean, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120505060735')
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+Migrating to CreateLevels (20120505060738)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "levels" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "badge_id" integer, "user_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120505060738')
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+Migrating to AddPointsToUsers (20120505060741)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "users" ADD "points" integer[0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120505060741')
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (50.5ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "points", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", Sat, 05 May 2012 06:10:23 UTC +00:00], ["email", nil], ["name", nil], ["points", nil], ["updated_at", Sat, 05 May 2012 06:10:23 UTC +00:00]]
+  [1m[35m (1.4ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "points", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", Sat, 05 May 2012 06:10:23 UTC +00:00], ["email", nil], ["name", nil], ["points", nil], ["updated_at", Sat, 05 May 2012 06:10:23 UTC +00:00]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "points", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", Sat, 05 May 2012 06:10:23 UTC +00:00], ["email", nil], ["name", nil], ["points", nil], ["updated_at", Sat, 05 May 2012 06:10:23 UTC +00:00]]
+  [1m[35m (0.9ms)[0m  commit transaction
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "users" [0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "points", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", Sat, 05 May 2012 06:10:23 UTC +00:00], ["email", nil], ["name", nil], ["points", nil], ["updated_at", Sat, 05 May 2012 06:10:23 UTC +00:00]]
+  [1m[35m (1.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "points", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", Sat, 05 May 2012 06:10:23 UTC +00:00], ["email", nil], ["name", nil], ["points", nil], ["updated_at", Sat, 05 May 2012 06:10:23 UTC +00:00]]
+  [1m[36m (1.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "points", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", Sat, 05 May 2012 06:10:23 UTC +00:00], ["email", nil], ["name", nil], ["points", nil], ["updated_at", Sat, 05 May 2012 06:10:23 UTC +00:00]]
+  [1m[35m (0.9ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "points", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", Sat, 05 May 2012 06:10:23 UTC +00:00], ["email", nil], ["name", nil], ["points", nil], ["updated_at", Sat, 05 May 2012 06:10:23 UTC +00:00]]
+  [1m[36m (1.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "points", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", Sat, 05 May 2012 06:10:23 UTC +00:00], ["email", nil], ["name", nil], ["points", nil], ["updated_at", Sat, 05 May 2012 06:10:23 UTC +00:00]]
+  [1m[35m (1.2ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "points", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", Sat, 05 May 2012 06:10:23 UTC +00:00], ["email", nil], ["name", nil], ["points", nil], ["updated_at", Sat, 05 May 2012 06:10:23 UTC +00:00]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "users" 
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "points", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", Sat, 05 May 2012 06:10:23 UTC +00:00], ["email", nil], ["name", nil], ["points", nil], ["updated_at", Sat, 05 May 2012 06:10:23 UTC +00:00]]
+  [1m[36m (2.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "points", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", Sat, 05 May 2012 06:10:23 UTC +00:00], ["email", "user@test.com"], ["name", "user"], ["points", nil], ["updated_at", Sat, 05 May 2012 06:10:23 UTC +00:00]]
+  [1m[35m (1.3ms)[0m  commit transaction
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT 1[0m
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateUsers (20120505060729)
+Migrating to CreateBadges (20120505060735)
+Migrating to CreateLevels (20120505060738)
+Migrating to AddPointsToUsers (20120505060741)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (32.3ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "points", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", Sat, 05 May 2012 06:10:49 UTC +00:00], ["email", "user@test.com"], ["name", "user"], ["points", nil], ["updated_at", Sat, 05 May 2012 06:10:49 UTC +00:00]]
+  [1m[35m (2.4ms)[0m  commit transaction
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT 1[0m
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateUsers (20120505060729)
+Migrating to CreateBadges (20120505060735)
+Migrating to CreateLevels (20120505060738)
+Migrating to AddPointsToUsers (20120505060741)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (33.2ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "points", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", Sat, 05 May 2012 06:11:01 UTC +00:00], ["email", "user@test.com"], ["name", "user"], ["points", nil], ["updated_at", Sat, 05 May 2012 06:11:01 UTC +00:00]]
+  [1m[35m (2.1ms)[0m  commit transaction
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT 1[0m
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateUsers (20120505060729)
+Migrating to CreateBadges (20120505060735)
+Migrating to CreateLevels (20120505060738)
+Migrating to AddPointsToUsers (20120505060741)
+  [1m[35mSQL (1.6ms)[0m  DELETE FROM "users"
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (34.7ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "points", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", Sat, 05 May 2012 06:11:22 UTC +00:00], ["email", "user@test.com"], ["name", "user"], ["points", nil], ["updated_at", Sat, 05 May 2012 06:11:22 UTC +00:00]]
+  [1m[36m (1.6ms)[0m  [1mcommit transaction[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("schema_migrations")[0m
+  [1m[35m (0.1ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.0ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateUsers (20120505060729)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "email" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120505060729')
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+Migrating to CreateBadges (20120505060735)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mCREATE TABLE "badges" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "points" integer, "default" boolean, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120505060735')
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+Migrating to CreateLevels (20120505060738)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mCREATE TABLE "levels" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "badge_id" integer, "user_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120505060738')
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+Migrating to AddPointsToUsers (20120505060741)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "users" ADD "points" integer[0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120505060741')
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (9.3ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "points", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", Sat, 05 May 2012 06:13:54 UTC +00:00], ["email", "user@test.com"], ["name", "user"], ["points", nil], ["updated_at", Sat, 05 May 2012 06:13:54 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  commit transaction
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT 1[0m
+  [1m[36m (0.2ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("schema_migrations")[0m
+  [1m[35m (0.2ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateUsers (20120505060729)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "email" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120505060729')
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+Migrating to CreateBadges (20120505060735)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mCREATE TABLE "badges" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "points" integer, "default" boolean, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120505060735')
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+Migrating to CreateLevels (20120505060738)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mCREATE TABLE "levels" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "badge_id" integer, "user_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120505060738')
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+Migrating to AddPointsToUsers (20120505060741)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "users" ADD "points" integer[0m
+  [1m[35m (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120505060741')
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (10.6ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "points", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", Sat, 05 May 2012 06:14:02 UTC +00:00], ["email", "user@test.com"], ["name", "user"], ["points", nil], ["updated_at", Sat, 05 May 2012 06:14:02 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  commit transaction
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT 1[0m
+  [1m[36m (0.1ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("schema_migrations")[0m
+  [1m[35m (0.1ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateUsers (20120505060729)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "email" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120505060729')
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+Migrating to CreateBadges (20120505060735)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mCREATE TABLE "badges" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "points" integer, "default" boolean, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120505060735')
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+Migrating to CreateLevels (20120505060738)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mCREATE TABLE "levels" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "badge_id" integer, "user_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120505060738')
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+Migrating to AddPointsToUsers (20120505060741)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "users" ADD "points" integer[0m
+  [1m[35m (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120505060741')
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
