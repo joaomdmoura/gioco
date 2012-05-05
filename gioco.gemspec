@@ -9,7 +9,5 @@ Gem::Specification.new do |s|
   s.email       = 'joaomdmoura@gmail.com'
   s.files       = Dir[ 'lib/*', 'lib/**/*', 'lib/**/**/*', 'init.rb' ]
   s.homepage    = 'http://joaomdmoura.github.com/gioco/'
-  s.has_rdoc 		= false
-  s.test_files 	= Dir['test/**/*_test.rb']
 
 end
