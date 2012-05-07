@@ -25,7 +25,6 @@ module Gioco
       old_pontuation  = resource.points.to_i
 
       related_badges  = Badge.where((old_pontuation < points) ? "points <= #{points}" : "points > #{points} AND points <= #{old_pontuation}" )
-
       Badge.transaction do
         resource.update_attribute( :points, points )
         related_badges.each do |badge|
