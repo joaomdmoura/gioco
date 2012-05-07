@@ -6,11 +6,7 @@ describe Gioco::Badges do
   let(:noob_badge) { FactoryGirl.create(:badge) }
   let(:medium_badge) { FactoryGirl.create(:badge, { :name => "medium", :points => 500 } ) }
 
-  context "Get a new resource and add and remove badges to it" do
-
-    it "should have nil as value of points" do
-      user.points.should == nil
-    end
+  describe "Get a new resource and add and remove badges to it" do
 
     context "Adding a badge to an user using ids" do
 
@@ -19,7 +15,7 @@ describe Gioco::Badges do
       end
 
       it "should add the n00b badge a user" do
-        user.badges.should include noob_badge
+        User.last.badges.should include noob_badge
       end
 
       it "should have now the points related to n00b badge" do
@@ -35,7 +31,7 @@ describe Gioco::Badges do
       end
 
       it "should add the n00b badge a user" do
-        user.badges.should include medium_badge
+        User.last.badges.should include medium_badge
       end
 
       it "should have now the points related to n00b badge" do
