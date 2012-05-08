@@ -2,7 +2,7 @@ module Gioco
   class Badges < Core
     def self.add(rid, badge_id, resource = false, badge = false)
       resource        = get_resource( rid )   if !resource
-      badge           = get_badge( badge_id ) if !badge
+      badge           = Badge.find( badge_id ) if !badge
 
       if POINTS && !resource.badges.include?(badge)
         sync_resource_by_points( resource, badge.points )
@@ -13,7 +13,7 @@ module Gioco
 
     def self.remove( rid, badge_id, resource = false, badge = false )
       resource  = get_resource( rid )   if !resource
-      badge     = get_badge( badge_id ) if !badge
+      badge     = Badge.find( badge_id ) if !badge
 
       if POINTS && resource.badges.include?(badge)
         new_ponctuation = Badge.where( "points < #{badge.points}" )[0]

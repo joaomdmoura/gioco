@@ -1,19 +1,15 @@
 module Gioco
   class Core
     def self.get_resource(rid)
-      eval(RESOURCE_NAME.capitalize).find(rid)
-    end
-
-    def self.get_badge(bid)
-      Badge.find(bid)
+      RESOURCE_NAME.capitalize.constantize.find(rid)
     end
 
     def self.ranking
       if POINTS
-        eval(RESOURCE_NAME.capitalize).order("points DESC")
+        RESOURCE_NAME.capitalize.constantize.order("points DESC")
       else
-        eval(RESOURCE_NAME.capitalize).all(
-          :select => "#{eval(RESOURCE_NAME.capitalize).table_name}.*,
+        RESOURCE_NAME.capitalize.constantize.all(
+          :select => "#{RESOURCE_NAME.capitalize.constantize.table_name}.*,
                       COUNT(levels.badge_id) AS number_of_levels",
           :joins => :levels,
           :group => "#{RESOURCE_NAME}_id",
@@ -36,5 +32,6 @@ module Gioco
         end
       end
     end
+    
   end
 end

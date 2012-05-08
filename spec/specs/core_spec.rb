@@ -12,10 +12,6 @@ describe Gioco::Core do
     Gioco::Core.get_resource(user_a.id).should == user_a
   end
 
-  it "Find the current badge by id" do
-    Gioco::Core.get_badge(noob_badge.id).should == noob_badge
-  end
-
   context "Generating a ranking of users" do
 
     before(:all) do
