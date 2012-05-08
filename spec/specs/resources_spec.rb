@@ -12,34 +12,28 @@ describe Gioco::Resources do
       user.points.should == nil
     end
 
-    context "Adding points to an user win noob badge using resource id" do
+    context "Incressing points to an user win noob badge" do
 
-      before(:all) do
+      it "Add the n00b badge and the points related to an user" do
         Gioco::Resources.change_points( user.id, noob_badge.points )
-      end
-
-      it "should add the n00b badge a user" do
-        User.last.badges.should include noob_badge
-      end
-
-      it "should have the points related to n00b badge" do
-        User.last.points.should == noob_badge.points
+        user.reload
+        user.badges.should include noob_badge
+        user.points.should == noob_badge.points
       end
 
     end
 
-    context "Adding points to an user win meidum badge using a user object" do
+    context "Decressing points to an user loose meidum badge" do
 
       before(:all) do
-        Gioco::Resources.change_points( nil, medium_badge.points, user )
+        Gioco::Resources.change_points( user.id, medium_badge.points )
       end
 
-      it "should add the medium badge a user" do
-        User.last.badges.should include medium_badge
-      end
-
-      it "should have now the points related to n00b badge" do
-        User.last.points.should == medium_badge.points
+      it "Remove the medium badge and the points related" do
+        Gioco::Resources.change_points( user.id, -medium_badge.points )
+        user.reload
+        user.badges.should_not include medium_badge
+        user.points.should == 0
       end
 
     end

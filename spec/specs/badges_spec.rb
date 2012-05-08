@@ -8,69 +8,29 @@ describe Gioco::Badges do
 
   describe "Get a new resource and add and remove badges to it" do
 
-    context "Adding a badge to an user using ids" do
+    context "Adding a badge to an user" do
 
-      before(:all) do
+      it "Add the n00b badge and the points related to an user" do
         Gioco::Badges.add( user.id, noob_badge.id )
-      end
-
-      it "should add the n00b badge a user" do
-        User.last.badges.should include noob_badge
-      end
-
-      it "should have now the points related to n00b badge" do
-        User.last.points.should == noob_badge.points
+        user.reload
+        user.badges.should include noob_badge
+        user.points.should == noob_badge.points
       end
 
     end
 
-    context "Adding a badge to an user using objects" do
-
-      before(:all) do
-        Gioco::Badges.add( nil, nil, user, medium_badge )
-      end
-
-      it "should add the n00b badge a user" do
-        User.last.badges.should include medium_badge
-      end
-
-      it "should have now the points related to n00b badge" do
-        User.last.points.should == medium_badge.points
-      end
-
-    end
-
-    context "Removing a badge to an user using ids" do
+    context "Removing a badge to an user" do
 
       before(:all) do
         Gioco::Badges.add( user.id, noob_badge.id )
-        Gioco::Badges.add( user.id, medium_badge.id )
+        Gioco::Badges.add( user.id, medium_badge.id )        
+      end
+
+      it "Remove the medium badge and the points related" do
         Gioco::Badges.remove( user.id, medium_badge.id )
-      end
-
-      it "should remove the medium badge a user" do
-        User.last.badges.should_not include medium_badge
-      end
-
-      it "should have again the points related old n00b badge" do
-        User.last.points.should == noob_badge.points
-      end
-
-    end
-
-    context "Removing a badge to an user using objects" do
-
-      before(:all) do
-        Gioco::Badges.add( nil, nil, user, noob_badge )
-        Gioco::Badges.remove( nil, nil, user, noob_badge )
-      end
-
-      it "should add the n00b badge a user" do
-        User.last.badges.should_not include noob_badge
-      end
-
-      it "should have now 0 points cause was the last badge related to the user" do
-        User.last.points.should == 0
+        user.reload
+        user.badges.should_not include medium_badge
+        user.points.should == noob_badge.points
       end
 
     end
