@@ -5,15 +5,23 @@ module Gioco
     
     desc "Setup Gioco for some resource"
     class_option :points, :type => :boolean, :default => false, :desc => "Setup gioco with points-system based"
+    class_option :types, :type => :boolean, :default => false, :desc => "Setup gioco with multiples types(categories) of badges."
 
     def generate_models
-      generate("model", "badge name:string #{(options[:points]) ? "points:integer" : ""} default:boolean")
       generate("model", "level badge_id:integer #{file_name}_id:integer")
-      generate("migration", "add_points_to_#{file_name.pluralize} points:integer") if options[:points]
+      if options[:types]
+        generate("model", "point user_id:integer type_id:integer value:integer")
+        generate("model", "type name:string") 
+        generate("model", "badge name:string type_id:integer  #{(options[:points]) ? "points:integer" : ""} default:boolean")
+      else
+        generate("migration", "add_points_to_#{file_name.pluralize} points:integer") if options[:points]
+        generate("model", "badge name:string #{(options[:points]) ? "points:integer" : ""} default:boolean")
+      end
     end
 
     def creating_templates
       @points = ( options[:points] ) ? true : false
+      @types = ( options[:types] ) ? true : false
       template "gioco.rb", "config/initializers/gioco.rb"
     end
 
@@ -26,6 +34,15 @@ module Gioco
 
       add_relationship( "level", file_name, "belongs_to" )
       add_relationship( "level", "badge", "belongs_to" )
+
+      if options[:types]
+        add_relationship( file_name, "points", "has_many" )
+        add_relationship( "type", "points", "has_many" )
+        add_relationship( "type", "badges", "has_many" )
+        add_relationship( "badge", "type", "belongs_to" )
+        add_relationship( "point", file_name, "belongs_to" )
+        add_relationship( "point", "type", "belongs_to" )
+      end
     end
 
     def create_rakes
@@ -36,23 +53,33 @@ namespace :gioco do
   
   desc "Used to add a new badge at Gioco scheme"
   
-  task :add_badge, [:name, #{(options[:points]) ? ":points, " : ""}:default] => :environment do |t, args|
+  task :add_badge, [:name, #{":points, " if options[:points]}:default#{", :type" if options[:types]}] => :environment do |t, args|
     args.default = ( args.default ) ? eval(args.default) : false
 
-    if !args.name #{(options[:points]) ? "&& !args.points" : ""}
+
+    if !args.name #{"&& !args.points" if options[:points]}#{" && !args.type" if options[:types]}
       puts "There are missing some arguments"
     
     else
+      #{"type = ( Type.find_by_name(args.type) ) ? Type.find_by_name(args.type) : Type.create({ :name => args.type })" if options[:types]}
+
       badge = Badge.create({ 
                             :name => args.name, 
-                            #{(options[:points]) ? ":points => args.points," : ""}
+                            #{":points => args.points," if options[:points]}
+                            #{":type_id  => type.id," if options[:types]}
                             :default => args.default
                           })
-      
+
       if args.default
         resources = #{file_name.capitalize}.find(:all)
         resources.each do |r|
-          #{(options[:points]) ? "r.points = args.points" : ""}
+          #{
+          if options[:points] && options[:types]
+            "r.points  << Point.create({ :type_id => type.id, :value => args.points })"
+          elsif options[:points]
+            "r.points = args.points"
+          end
+          }
           r.badges << badge
           r.save
         end
@@ -75,7 +102,25 @@ namespace :gioco do
     end
 
   end
+#{
+  if options[:types]
+    'task :remove_type, [:name] => :environment do |t, args|
 
+      if !args.name
+        puts "There are missing some arguments"
+      
+      else
+        type = Type.find_by_name( args.name )
+        
+        if type.badges.nil?
+          type.destroy
+        else
+          puts "Aborted! There are badges related with this type."
+        end
+      end
+    end'
+  end
+}  
 end
         EOS
       end
@@ -100,13 +145,17 @@ end
 Gioco successfully installed.
 
 Now you are able to add Badges using:
-  rake gioco:add_badge[BADGE_NAME,POINTS,DEFAULT]
+  rake gioco:add_badge[BADGE_NAME#{",POINTS" if options[:points]}#{",TYPE" if options[:types]},DEFAULT]
 
-If you installed gioco without points option:
-  rake gioco:add_badge[BADGE_NAME,DEFAULT]
-
-And to remove Badges using:
+To remove Badges using:
   rake gioco:remove_badge[BADGE_NAME]
+
+#{
+  if options[:types]
+"And to remove Types using:
+  rake gioco:remove_type[TYPE_NAME]"
+  end
+}
 
 For usage and more infomation go to the documentation:
 http://joaomdmoura.github.com/gioco/

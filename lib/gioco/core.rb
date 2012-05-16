@@ -4,19 +4,6 @@ module Gioco
       RESOURCE_NAME.capitalize.constantize.find(rid)
     end
 
-    def self.ranking
-      if POINTS
-        RESOURCE_NAME.capitalize.constantize.order("points DESC")
-      else
-        RESOURCE_NAME.capitalize.constantize.all(
-          :select => "#{RESOURCE_NAME.capitalize.constantize.table_name}.*,
-                      COUNT(levels.badge_id) AS number_of_levels",
-          :joins => :levels,
-          :group => "#{RESOURCE_NAME}_id",
-          :order => "number_of_levels DESC")
-      end
-    end
-
     def self.sync_resource_by_points(resource, points)
       old_pontuation  = resource.points.to_i
 
