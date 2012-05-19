@@ -53,7 +53,7 @@ namespace :gioco do
   
   desc "Used to add a new badge at Gioco scheme"
   
-  task :add_badge, [:name, #{":points, " if options[:points]}:default#{", :type" if options[:types]}] => :environment do |t, args|
+  task :add_badge, [:name, #{":points, " if options[:points]}#{":type, " if options[:types]}:default] => :environment do |t, args|
     args.default = ( args.default ) ? eval(args.default) : false
 
 
@@ -81,7 +81,7 @@ namespace :gioco do
           end
           }
           r.badges << badge
-          r.save
+          r.save!
         end
       end
 
