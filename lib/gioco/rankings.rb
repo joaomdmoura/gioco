@@ -22,12 +22,12 @@ module Gioco
         ranking = RESOURCE_NAME.capitalize.constantize.order("points DESC")
 
       elsif !POINTS && !TYPES
-        ranking = RESOURCE_NAME.capitalize.constantize.all(
-          :select => "#{RESOURCE_NAME.capitalize.constantize.table_name}.*,
-                      COUNT(levels.badge_id) AS number_of_levels",
-          :joins  => :levels,
-          :group  => "#{RESOURCE_NAME}_id",
-          :order  => "number_of_levels DESC")
+        ranking = RESOURCE_NAME.capitalize.constantize
+                    .select("#{RESOURCE_NAME.capitalize.constantize.table_name}.*,
+                             COUNT(levels.badge_id) AS number_of_levels")
+                    .joins(:levels)
+                    .group("#{RESOURCE_NAME}_id")
+                    .order("number_of_levels DESC")
 
       end
 
