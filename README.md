@@ -1,6 +1,6 @@
 ![Alt text](http://joaomdmoura.github.com/gioco/assets/images/new_logo.png "A gamification gem for Ruby on Rails applications")
 
-# Gioco (current version - 0.1.8)
+# Gioco (current version - 0.3.5)
 A **gamification** gem to Ruby on Rails applications
 
 ![Alt text](https://secure.travis-ci.org/joaomdmoura/gioco.png?branch=master "Travis CI")
@@ -35,9 +35,12 @@ Setup
 **To setup gioco with you application**
 
 The MODEL_NAME should be replaced for the model you want to be, as gioco treat, the resource of the gamification. (eg. user )
+Gioco have two optionals setup parameters, ``` --points ``` and ``` --types ```, it can be used togheter or not.
+
+Example.
 
 ```
-rails g gioco:setup MODEL_NAME --points;
+rails g gioco:setup MODEL_NAME --points --types;
 ```
 
 or
@@ -46,7 +49,9 @@ or
 rails g gioco:setup MODEL_NAME;
 ```
 
-The optional ``` --points ``` argument will setup the gioco with a points system. You can read more about how the badge, level and points implementation work at the [Documentation](http://joaomdmoura.github.com/gioco/)
+The optional ``` --points ``` argument will setup the gioco with a points system.
+And the optional argument ``` --types ```, provide an environment of multiple types of badges and points ( If the oprtion ``` --points ``` is being used too ). 
+You can read more about how the badge, level and points implementation work at the [Documentation](http://joaomdmoura.github.com/gioco/)
 
 
 Usage
@@ -54,26 +59,44 @@ Usage
 
 ###Badge
 After setup gioco with you application you are able to add or remove Badges as you want using the following commands:
+PS. The boolean DEFAULT option is responsible to add a specific badge to all your **current** resources registrations.
 
-To add Badges use:
+##Add
+
+To add Badges you will use rake tasks, the arguments will changing according the setup arguments that you used:
+
+Examples.
+
+With ```--points``` option:
+```
+	rake gioco:add_badge[BADGE_NAME, POINTS, DEFAULT]
+```
+
+With ```--types``` option:
+```
+	rake gioco:add_badge[BADGE_NAME, TYPE, DEFAULT]
+```
+
+With ```--points``` and ```--types``` option:
+```
+	rake gioco:add_badge[BADGE_NAME, POINTS, TYPE, DEFAULT]
+```
+
+Without ```--points``` and ```--types``` option:
 
 ```
-	rake gioco:add_badge[BADGE_NAME,POINTS,DEFAULT]
+	rake gioco:add_badge[BADGE_NAME, DEFAULT]
 ```
 
-Or if you installed gioco without points option:
-
-```
-	rake gioco:add_badge[BADGE_NAME,DEFAULT]
-```
+##Remove
 
 And to remove Badges use:
+
+Example.
 
 ```
 	rake gioco:remove_badge[BADGE_NAME]
 ```
-
-The boolean DEFAULT option is responsible to add a specific badge to all your current resources registrations.
 
 ###Methods
 
@@ -83,30 +106,30 @@ Those methods are:
 
 Resource is the focus of your gamification logic and it should be defined in you setup process.
 This method only is usefull when you setup the Gioco with the points system.
-The ``` Resource_obj ``` is an optional argument that can be use to avoid useless queries on database, so instead of pass a Resource_id you can pass it as ``` nil ``` and the resource obeject at the last parameter.
+**Ps. Type_id should be used only when you already used it as a setup argument**
 
 ```
-Gioco::Resources.change_points( Resource_id, Points, Resource_obj[optional] )
+Gioco::Resources.change_points( Resource_id, Points, Type_id )
 ```
 
-The Badge.add method is responsable to add a specific badge to some resource, again, the ``` Resource_obj ``` and the ``` Badge_obj ``` are optinal arguments that can be passed to avoid another query to get them if you already have it.
+The Badge.add method is responsable to add a specific badge to some resource.
 
 ```
-Gioco::Badge.add( Resource_id, Badge_id, Resource_obj[optional], Badge_obj[optional] )
+Gioco::Badge.add( Resource_id, Badge_id )
 ```
 
-The Badge.remove method is used to remove a badge of a resource, the ``` Resource_obj ``` and the ``` Badge_obj ``` follow the same logic of the others optional arguments.
+The Badge.remove method is used to remove a badge of a resource.
 
 ```
-Gioco::Badge.remove( Resource_id, Badge_id, Resource_obj[optional], Badge_obj[optional] )
+Gioco::Badge.remove( Resource_id, Badge_id )
 ```
 
 ###Ranking
 
-Gioco provide a method to list all Resources in a ranking inside of an array:
+Gioco provide a method to list all Resources in a ranking inside of an array, the result format will change according the setup arguments you used ( ```--points``` or/and ```--types``` ):
 
 ```
-Gioco::Core.ranking
+Gioco::Ranking.generate
 ```
 
 ###Get Badged and Levels
@@ -124,37 +147,49 @@ Example
 All basic usage flow to add gioco in an application using User as resource:
 
 ```
-> rails g gioco:setup user --points;
-...
-
-> rake gioco:add_badge[noob,0,true]
-> rake gioco:add_badge[medium,100]
-> rake gioco:add_badge[hard,200]
-> rake gioco:add_badge[pro,500]
+> rails g gioco:setup user --points --types;
 ```
 
-Now the gioco is already installed and synced with the applciation and four badges are created.
-
-The default badge ( noob ) already was added to all users that arelady have some register in database.
-
-Inside you application if we wanna give 100 points to users that get to this method, all we have to do is use the follow method already showed:
+Adding badges to the system using rake tasks, you badges have a pontuation and a type in this case cause I setup gioco using ```--points``` and ```--types``` arguments.
 
 ```
-Gioco::Resources.change_points( current_user.id, 100 )
+# Adding badges of a teacher type
+> rake gioco:add_badge[noob,0,teacher,true]
+> rake gioco:add_badge[medium,100,teacher]
+> rake gioco:add_badge[hard,200,teacher]
+> rake gioco:add_badge[pro,500,teacher]
+
+# Adding badges of a commenter type
+> rake gioco:add_badge[mude,0,commenter,true]
+> rake gioco:add_badge[speaker,100,commenter]
 ```
 
-Or if you wanna add or remove some badge, consequently adding or removing the necessary points:
+Now the gioco is already installed and synced with the applciation and six badges are created.
+
+The both defaults badge ( noob ) already was added to all users that we already have in our database.
+
+Inside you application if we wanna give 100 points to some user, inside your function you have to use the follow method already showed:
 
 ```
-Gioco::Badge.add( current_user.id , 2 )
+type =  Type.where( :name => "teacher" )
 
-Gioco::Badge.remove( current_user.id , 2 )
+Gioco::Resources.change_points( user.id, 100, type.id )
+```
+
+Or if you wanna add or remove some badge ( consequently the gioco will add or remove the necessary points ):
+
+```
+badge = Badge.where( :name => speaker )
+
+Gioco::Badge.add( user.id , badge.id )
+
+Gioco::Badge.remove( user.id , badge.id )
 ```
 
 To get a ranking of all resources all you need is call:
 
 ```
-Gioco:Core:ranking
+Gioco:Ranking:generate
 ```
 
 License
