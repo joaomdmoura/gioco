@@ -1,7 +1,7 @@
 <html>
 	<head>
 		<title>
-			Gioco - A gamification gem to Ruby on Rails applications
+			Gioco - A gamification gem for Ruby on Rails applications
 		</title>
 		<link href='http://fonts.googleapis.com/css?family=Bitter:400,700,400italic' rel='stylesheet' type='text/css'>
 		<link rel='stylesheet' href='http://joaomdmoura.github.com/gioco/assets/stylesheets/index.css' />
@@ -27,7 +27,7 @@
 
 			<div id="block2" class="block" >
 				It doesn't matter if you already
-				have a full and functional
+				have a fully functional
 				database, Gioco will <br />smoothly
 				integrate<br /> everything and
 				provide all methods that you
@@ -48,31 +48,31 @@
 
 					<span class="subtitle">Concept</span>
 					<br />
-					Gioco implements the concepts of <span class="highlight">Badge, Level, Points and Types</span> to reach the majority of gamifications implementations. <span class="highlight">Points</span> and <span class="highlight">Types</span> are optionals but can be very useful.<br />
-					The basic logic is that a <span class="highlight">Resource</span> ( eg. User ) has <span class="highlight">Points</span> of different <span class="highlight">Types</span> and when this Resource get a certain amount of Points of a specific Type it can win or lose <span class="highlight">Levels</span>, connecting or disconnecting the Resource with a <span class="highlight">Badge</span> ( getting a badge through a level ).<br />
+					Gioco implements the concepts of <span class="highlight">Badge, Level, Points and Types</span> to cover the majority of gamifications implementations. <span class="highlight">Points</span> and <span class="highlight">Types</span> are optional but can be very useful.<br />
+					The basic logic is that a <span class="highlight">Resource</span> ( e.g. User ) has <span class="highlight">Points</span> of different <span class="highlight">Types</span> and when this Resource gets a certain amount of Points of a specific Type it can win or lose <span class="highlight">Levels</span>, connecting or disconnecting the Resource with a <span class="highlight">Badge</span> ( getting a badge through a level ).<br />
 					But <span class="highlight">Points</span> are optional so, if you don't want to register Points, all you have to do is to add and remove <span class="highlight">Badges</span> as required by your business rules ( through a level ).
 					<br /><br />
 
 					<span class="subtitle">Install and Setup</span>
 					<br />
-					Gioco is available through Rubygems, to install add Gioco in your gemfile:<br />
+					Gioco is available through Rubygems, to install it add Gioco in your gemfile:<br />
 					<div class="code">gem 'gioco'</div>
 					and run Bundler:<br />
 					<div class="code">> bundle install</div>
 					<br />
 
-					After installing Gioco you'll need to set it up. The <span class="highlight">MODEL_NAME</span> should be replaced for the model you want the resource of the gamification to be. (eg. user )<br />
-					Gioco have two optionals setup parameters, <span class="highlight">--points</span> and <span class="highlight">--types</span>, it can be used togheter or not.<br />
+					After installing Gioco you'll need to set it up. The <span class="highlight">MODEL_NAME</span> should be replaced for the model you want the resource of the gamification to be. (e.g. user )<br />
+					Gioco has two optional setup parameters, <span class="highlight">--points</span> and <span class="highlight">--types</span>, they can be used togheter or not.<br />
 					<div class="code">rails g gioco:setup MODEL_NAME --points --types;</div>
 					or<br />
 					<div class="code">rails g gioco:setup MODEL_NAME;</div>
-					The optional <span class="highlight">--points</span> argument will setup the gioco with a points system explained at the <span class="highlight">Concept</span>. And the optional argument <span class="highlight">--types</span>, provide an environment of multiple types of badges and points ( If the oprtion --points is being used too ). 
+					The optional <span class="highlight">--points</span> argument will setup Gioco with a points system explained at the <span class="highlight">Concept</span>. And the optional argument <span class="highlight">--types</span> provides an environment of multiple types of badges and points ( If the option --points is being used too ). 
 					<br /><br />
 
 					<span class="subtitle">Badges Management</span>
 					<br />
 					The badges are managed through <span class="highlight">Rake tasks</span>, enabling you to add and remove badges as you need<br />
-					The boolean <span class="highlight">DEFAULT</span> option is responsible to add a specific badge to all your current resource registrations.<br /><br/>
+					The boolean <span class="highlight">DEFAULT</span> option is responsible for adding a specific badge to all your current resource registrations.<br />
 
 					To add Badges, use:<br />
 					With --points option:<br />
@@ -93,7 +93,7 @@
 
 					<span class="subtitle">Methods</span>
 					<br />
-					<span class="highlight">Gioco</span> provides you some methods to use inside of the application that will allow you to easily implement your gamification logic.<br/><br/>
+					<span class="highlight">Gioco</span> provides some methods that will allow you to easily implement your gamification logic inside your application.<br/><br/>
 
 					<span class="subtitle2">Resource</span><br/>
 
@@ -105,7 +105,7 @@
 
 					<span class="highlight">Add</span>
 					<div class="code">Gioco::Badge.add( Resource_id, Badge_id )</div>
-					The Badge.add method is responsible to add a specific badge to a resource.<br/><br />
+					The Badge.add method is responsible for adding a specific badge to a resource.<br/><br />
 
 					<span class="highlight">Remove</span>
 					<div class="code">Gioco::Badge.remove( Resource_id, Badge_id )</div>
@@ -115,7 +115,7 @@
 
 					<span class="highlight">Generate</span>
 					<div class="code">Gioco::Ranking.generate</div>
-					This method return an array with a ranking of all your resources ordered by points or quantity of badges, the result format will change according the setup arguments you used ( <span class="highlight">--points</span> or/and <span class="highlight">--types</span> ):br /><br />
+					This method returns an array with a ranking of all your resources ordered by points or quantity of badges, the result format will change according to the setup arguments you have used ( <span class="highlight">--points</span> and/or <span class="highlight">--types</span> ):br /><br />
 
 					<span class="subtitle">Application</span>
 					<br />
