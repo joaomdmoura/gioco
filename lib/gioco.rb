@@ -1,4 +1,4 @@
-module Gioco
+class Gioco
   require "gioco/core"
   require "gioco/resources"
   require "gioco/badges"

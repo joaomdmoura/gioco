@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    gioco (0.3.5)
+    gioco (0.3.6)
 
 GEM
   remote: http://rubygems.org/

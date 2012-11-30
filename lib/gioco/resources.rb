@@ -1,4 +1,4 @@
-module Gioco
+class Gioco
   class Resources < Core
     def self.change_points( rid, points, tid = false )
       resource          = get_resource( rid )

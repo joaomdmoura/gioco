@@ -1,4 +1,4 @@
-module Gioco
+class Gioco
   class Ranking < Core
 
      def self.generate

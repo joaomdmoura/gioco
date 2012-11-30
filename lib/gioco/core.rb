@@ -1,4 +1,4 @@
-module Gioco
+class Gioco
   class Core
     def self.get_resource(rid)
       RESOURCE_NAME.capitalize.constantize.find(rid)

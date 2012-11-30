@@ -1,4 +1,4 @@
-module Gioco
+class Gioco
   class Badges < Core
     def self.add(rid, badge_id)
       resource        = get_resource( rid )
