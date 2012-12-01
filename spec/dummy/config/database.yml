@@ -1,9 +1,0 @@
-# SQLite version 3.x
-#   gem install sqlite3
-
-test:
-  adapter: sqlite3
-  database: ":memory:"
-  verbosity: quiet
-  pool: 5
-  timeout: 5000
