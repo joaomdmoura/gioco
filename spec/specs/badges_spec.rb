@@ -1,17 +1,16 @@
 require 'spec_helper'
 
-describe Gioco::Badges do
-  
+describe Gioco::Badges do  
   let(:user) { FactoryGirl.create(:user) }
-  let(:type) { FactoryGirl.create(:type) }
-  let(:noob_badge) { FactoryGirl.create(:badge, { :type => type }) }
-  let(:medium_badge) { FactoryGirl.create(:badge, { :name => "medium", :points => 500, :type => type } ) }
+  let(:type) { Type.find_by_name "comments" }
+  let(:noob_badge) { Badge.find_by_name "noob" }
+  let(:medium_badge) { Badge.find_by_name "medium" }
 
   describe "Get a new resource and add and remove badges to it" do
 
     context "Adding a badge to an user" do
 
-      it "Add the n00b badge and the points related to an user" do
+      it "Add the noob badge and the points related to an user" do
         Gioco::Badges.add( user.id, noob_badge.id )
         user.reload
         user.badges.should include noob_badge

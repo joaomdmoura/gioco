@@ -4,15 +4,14 @@ describe Gioco::Ranking do
   let(:user_a) { FactoryGirl.create(:user) }
   let(:user_b) { FactoryGirl.create(:user) }
   let(:user_c) { FactoryGirl.create(:user) }
-  let(:type) { FactoryGirl.create(:type) }
-  let(:noob_badge) { FactoryGirl.create(:badge, :type => type) }
-  let(:medium_badge) { FactoryGirl.create(:badge, { :name => "medium", :points => 500, :type => type } ) }
-  let(:hard_badge) { FactoryGirl.create(:badge, { :name => "hard", :points => 1000, :type => type } ) }
+  let(:type) { Type.find_by_name "comments" }
+  let(:noob_badge) { Badge.find_by_name "noob" }
+  let(:medium_badge) { Badge.find_by_name "medium" }
+  let(:hard_badge) { Badge.find_by_name "hard" }
 
   context "Generating a ranking of users" do
 
     before(:all) do
-      Type.delete_all
       User.delete_all
       Gioco::Badges.add( user_a.id, noob_badge.id )
       Gioco::Badges.add( user_b.id, hard_badge.id )

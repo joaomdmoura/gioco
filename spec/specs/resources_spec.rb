@@ -1,13 +1,10 @@
 require 'spec_helper'
 
 describe Gioco::Resources do
-  
   let(:user) { FactoryGirl.create(:user) }
-  let(:type) { FactoryGirl.create(:type) }
-  let(:noob_badge) { FactoryGirl.create(:badge, :type => type) }
-  let(:medium_badge) { FactoryGirl.create(:badge, { :name => "medium", 
-                                                    :points => 500, 
-                                                    :type => type } ) }
+  let(:type) { Type.find_by_name "comments" }
+  let(:noob_badge) { Badge.find_by_name "noob" }
+  let(:medium_badge) { Badge.find_by_name "medium" }
 
   context "Get a new resource and add and remove points to it" do
 
