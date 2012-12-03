@@ -14,7 +14,7 @@ describe Gioco::Resources do
 
     context "Incressing points to an user win noob badge of type comment" do
 
-      it "Add the n00b badge and the points related to an user" do
+      it "Add the noob badge and the points related to an user" do
         Gioco::Resources.change_points( user.id, noob_badge.points, type.id )
         user.reload
         user.badges.should include noob_badge
