@@ -1,5 +1,5 @@
 language: ruby
-before_install: rake dummy
+before_install: bundle install; rake dummy
 rvm:
   - 1.9.2
   - 1.9.3
