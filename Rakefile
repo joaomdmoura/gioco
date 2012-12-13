@@ -1,4 +1,5 @@
 #!/usr/bin/env rake
+require 'rubygems'
 require 'rspec/core/rake_task'
 
 desc "Run specs"
