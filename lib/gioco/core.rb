@@ -18,7 +18,7 @@ class Gioco
 
       Badge.transaction do
         if TYPES && type
-          resource.points  << Point.create({ :type_id => type.id, :value => new_pontuation })
+          resource.points << Point.create({ :type_id => type.id, :value => points })
         elsif options[:points]
           resource.update_attribute( :points, new_pontuation )
         end

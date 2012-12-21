@@ -21,6 +21,24 @@ describe Gioco::Resources do
         user.points.where(:type_id => type.id).sum(:value) == noob_badge.points
       end
 
+      it "Add points related to a user's type, using single increases" do
+        final_score = 4
+        final_score.times do
+          Gioco::Resources.change_points( user.id, 1, type.id)
+        end
+        user.points.where(:type_id => type.id).sum(:value).should == final_score
+      end
+
+      it "Remove points related to a user's type, using single decreases" do
+        initial_score = 10
+        final_score = 4
+        Gioco::Resources.change_points( user.id, initial_score, type.id)
+        (initial_score - final_score).times do
+          Gioco::Resources.change_points( user.id, -1, type.id)
+        end
+        user.points.where(:type_id => type.id).sum(:value).should == final_score
+      end
+
     end
 
     context "Decressing points to an user loose meidum badge" do

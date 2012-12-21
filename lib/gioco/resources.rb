@@ -9,7 +9,7 @@ class Gioco
         old_pontuation  = resource.points.to_i
       end
       new_pontuation    = old_pontuation + points
-      sync_resource_by_points(resource, new_pontuation, type)
+      sync_resource_by_points(resource, points, type)
     end
   end
 end
