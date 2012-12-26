@@ -13,9 +13,8 @@ namespace :gioco do
 
     if !args.name #{"&& !args.points" if options[:points]}#{" && !args.type" if options[:types]}
       puts "There are missing some arguments"
-    
     else
-      #{'badge_string = "type = Type.find_or_create_by_name(args.type)\n"' if options[:types]}
+      badge_string = "#{options[:types] ? 'type = Type.find_or_create_by_name(args.type)\n' : ''}"
 
       badge_string = badge_string + "badge = Badge.create({ 
                       :name => args.name, 
@@ -40,10 +39,13 @@ namespace :gioco do
       end
       
       badge_string = badge_string + "puts '> Badge successfully created'"
-      
+
       eval badge_string
 
-      badge_string.gsub!('args.name', "'\#\{args.name\}'").gsub!('args.type', "'\#\{args.type\}'").gsub!('args.points', "'\#\{args.points\}'").gsub!('arg_default', "'\#\{arg_default\}'")
+      badge_string.gsub!('args.name', "'\#\{args.name\}'")
+      #{"badge_string.gsub!('args.type', \"'\#\{args.type\}'\")" if options[:types]}
+      #{"badge_string.gsub!('args.points', \"\'\#\{args.points\}\'\")" if options[:points]}
+      badge_string.gsub!('arg_default', "'\#\{arg_default\}'")
       
       file_path = "/db/gioco/create_badge_\#\{args.name\}.rb"
       File.open("\#\{Rails.root\}\#\{file_path\}", 'w') { |f| f.write badge_string }
@@ -66,22 +68,23 @@ namespace :gioco do
 
   end
 #{
-  if options[:types]
-    'task :remove_type, [:name] => :environment do |t, args|
-      if !args.name
-        puts "There are missing some arguments"
-      
+if options[:types]
+  '
+  desc "Removes a given type"
+  task :remove_type, [:name] => :environment do |t, args|
+    if !args.name
+      puts "There are missing some arguments"
+    else
+      type = Type.find_by_name( args.name )
+      if type.badges.nil?
+        type.destroy
       else
-        type = Type.find_by_name( args.name )
-        
-        if type.badges.nil?
-          type.destroy
-        else
-          puts "Aborted! There are badges related with this type."
-        end
+        puts "Aborted! There are badges related with this type."
       end
-    end'
+    end
   end
+  '
+end
 }  
 end
         EOS

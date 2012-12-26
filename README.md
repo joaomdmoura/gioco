@@ -88,7 +88,7 @@ Without ```--points``` and ```--types``` option:
 	rake gioco:add_badge[BADGE_NAME, DEFAULT]
 ```
 
-####Remove
+####Remove Badge
 
 And to remove Badges use:
 
@@ -97,6 +97,18 @@ Example.
 ```
 	rake gioco:remove_badge[BADGE_NAME]
 ```
+
+####Remove Type
+
+To remove Types use:
+
+Example.
+
+```
+  rake gioco:remove_type[TYPE_NAME]
+```
+
+If the type has badges, you must remove badges first.
 
 ###Methods
 
