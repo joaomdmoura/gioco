@@ -68,22 +68,23 @@ namespace :gioco do
 
   end
 #{
-  if options[:types]
-    'task :remove_type, [:name] => :environment do |t, args|
-      if !args.name
-        puts "There are missing some arguments"
-      
+if options[:types]
+  '
+  desc "Removes a given type"
+  task :remove_type, [:name] => :environment do |t, args|
+    if !args.name
+      puts "There are missing some arguments"
+    else
+      type = Type.find_by_name( args.name )
+      if type.badges.nil?
+        type.destroy
       else
-        type = Type.find_by_name( args.name )
-        
-        if type.badges.nil?
-          type.destroy
-        else
-          puts "Aborted! There are badges related with this type."
-        end
+        puts "Aborted! There are badges related with this type."
       end
-    end'
+    end
   end
+  '
+end
 }  
 end
         EOS
