@@ -61,7 +61,7 @@ Usage
 After setup gioco with you application you are able to add or remove Badges as you want using the following commands:
 PS. The boolean DEFAULT option is responsible to add a specific badge to all your **current** resources registrations.
 
-####Add
+####Add Bagde
 
 To add Badges you will use rake tasks, the arguments will changing according the setup arguments that you used:
 
