@@ -37,11 +37,23 @@ module ModelGenerator
     end
   end
 
+  def add_validations
+    add_validation( "badge", "name", [ ["presence", "true"] ] )
+    add_validation( "type", "name", [ ["uniqueness", "true"], ["presence", "true"] ] ) if options[:types]
+  end
+
   private
 
     def add_relationship ( model, related, relation, through = false, dependent = false )
       gsub_file "app/models/#{model}.rb", get_class_header(model), "#{get_class_header(model)}
       #{relation} :#{related} #{(through) ? ", :through => :#{through}" : ""} #{(dependent) ? ", :dependent => :#{dependent}" : ""}"
+    end
+
+    def add_validation ( model, field, validations = [] )
+      validations.each do |validation|
+        gsub_file "app/models/#{model}.rb", get_class_header(model), "#{get_class_header(model)}
+        validates :#{field}, :#{validation[0]} => #{validation[1]}"
+      end
     end
 
     def get_class_header ( model_name )

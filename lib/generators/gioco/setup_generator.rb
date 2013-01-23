@@ -20,6 +20,7 @@ class Gioco
     def execute
       generate_models
       creating_templates
+      add_validations
       setup_relations
       create_rakes
       configuring_seed
