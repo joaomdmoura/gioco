@@ -16,6 +16,7 @@ task :dummy => [
                     :support_files,
                     :setup,
                     :cleanning_project,
+                    :trash_badges,
                     :adding_badges
                   ]
 
@@ -46,6 +47,12 @@ task :cleanning_project do
   sh "rm -rf #{test}/tmp"
   sh "rm -rf #{test}/vendor"
   sh "rm -rf #{test}/public"
+end
+
+task :trash_badges do
+  sh "cd #{test};RAILS_ENV=test rake gioco:add_badge[noob,100,teacher]"
+  sh "cd #{test};RAILS_ENV=test rake gioco:remove_badge[noob,teacher]"
+  sh "cd #{test};RAILS_ENV=test rake gioco:remove_type[teacher]"
 end
 
 task :adding_badges do

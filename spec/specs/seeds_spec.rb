@@ -24,6 +24,10 @@ describe "Gioco: seeds support" do
         Badge.all.size.should == 3
         Type.all.size.should  == 1
       end
+
+      it "Type teacher should not exist" do
+        Type.find_by_name("teacher").should be_nil
+      end
     
     end
 
