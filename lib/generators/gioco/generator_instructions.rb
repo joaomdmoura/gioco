@@ -8,10 +8,10 @@ module GeneratorInstructions
 Gioco successfully installed.
 
 Now you are able to add Badges using:
-  rake gioco:add_badge[BADGE_NAME#{",POINTS" if options[:points]}#{",TYPE" if options[:types]},DEFAULT]
+  rake gioco:add_badge[BADGE_NAME#{",POINTS" if options[:points]}#{",TYPE_NAME" if options[:types]},DEFAULT]
 
 To remove Badges using:
-  rake gioco:remove_badge[BADGE_NAME]
+  rake gioco:remove_badge[BADGE_NAME#{",TYPE_NAME" if options[:types]}]
 
 #{
   if options[:types]

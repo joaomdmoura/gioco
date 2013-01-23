@@ -94,6 +94,12 @@ And to remove Badges use:
 
 Example.
 
+With ```--types``` option:
+```
+	rake gioco:remove_badge[BADGE_NAME, TYPE_NAME]
+```
+
+Without ```--types``` option:
 ```
 	rake gioco:remove_badge[BADGE_NAME]
 ```
