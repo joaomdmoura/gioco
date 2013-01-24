@@ -6,12 +6,13 @@ class Gioco
 
     def self.sync_resource_by_points(resource, points, type = false)
 
+      badges = { :added => [], :removed =>[] }
       if TYPES && type
         old_pontuation  = resource.points.where(:type_id => type.id).sum(:value)
-        related_badges  = Badge.where( ((old_pontuation < points) ? "points <= #{points}" : "points > #{points} AND points <= #{old_pontuation}") + " AND type_id = #{type.id}" )
+        related_badges  = Badge.where(((old_pontuation < points) ? "points <= #{points}" : "points > #{points} AND points <= #{old_pontuation}") + " AND type_id = #{type.id}")
       else
         old_pontuation  = resource.points.to_i
-        related_badges  = Badge.where((old_pontuation < points) ? "points <= #{points}" : "points > #{points} AND points <= #{old_pontuation}" )
+        related_badges  = Badge.where((old_pontuation < points) ? "points <= #{points}" : "points > #{points} AND points <= #{old_pontuation}")
       end
       
       new_pontuation    = ( old_pontuation < points ) ? points :  - (old_pontuation - points)
@@ -24,11 +25,16 @@ class Gioco
         end
         related_badges.each do |badge|
           if old_pontuation < points
-            resource.badges << badge if !resource.badges.include?(badge)
+            if !resource.badges.include?(badge)
+              resource.badges << badge
+              badges[:added] << badge
+            end
           elsif old_pontuation > points
             resource.levels.where( :badge_id => badge.id )[0].destroy
+            badges[:removed] << badge
           end
         end
+        badges
       end
     end
     
