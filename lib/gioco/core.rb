@@ -15,13 +15,13 @@ class Gioco
         related_badges  = Badge.where((old_pontuation < points) ? "points <= #{points}" : "points > #{points} AND points <= #{old_pontuation}")
       end
       
-      new_pontuation    = ( old_pontuation < points ) ? points :  - (old_pontuation - points)
+      new_pontuation    = ( old_pontuation < points ) ? points - old_pontuation : - (old_pontuation - points)
 
       Badge.transaction do
         if TYPES && type
-          resource.points << Point.create({ :type_id => type.id, :value => points })
+          resource.points << Point.create({ :type_id => type.id, :value => new_pontuation })
         elsif POINTS
-          resource.update_attribute( :points, new_pontuation )
+          resource.update_attribute( :points, points )
         end
         related_badges.each do |badge|
           if old_pontuation < points
