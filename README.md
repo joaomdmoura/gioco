@@ -133,13 +133,13 @@ Gioco::Resources.change_points( Resource_id, Points, Type_id )
 The Badge.add method is responsable to add a specific badge to some resource.
 
 ```
-Gioco::Badge.add( Resource_id, Badge_id )
+Gioco::Badges.add( Resource_id, Badge_id )
 ```
 
 The Badge.remove method is used to remove a badge of a resource.
 
 ```
-Gioco::Badge.remove( Resource_id, Badge_id )
+Gioco::Badges.remove( Resource_id, Badge_id )
 ```
 
 ###Ranking
