@@ -22,7 +22,7 @@ class Gioco
       end
       next_badge      = Badge.where("points > #{old_pontuation}").order("points ASC").first
       if next_badge
-        percentage      = old_pontuation*100/next_badge.points
+        percentage      = (next_badge.points - old_pontuation)*100/next_badge.points
         points          = next_badge.points - old_pontuation
         next_badge_info = { 
                             :badge      => next_badge,
