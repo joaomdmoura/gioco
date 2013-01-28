@@ -37,7 +37,7 @@ end
 
 task :setup do
   sh "cd #{test};RAILS_ENV=test rails g model user name:string email:string"
-  sh "cd #{test};RAILS_ENV=test rails g gioco:setup user --points --types"
+  sh "cd #{test};echo user | RAILS_ENV=test rails g gioco:setup --points --types;"
 end
 
 task :cleanning_project do

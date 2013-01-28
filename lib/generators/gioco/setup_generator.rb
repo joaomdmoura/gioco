@@ -4,7 +4,7 @@ require "generators/gioco/migrations_generator"
 require "generators/gioco/generator_instructions"
 
 class Gioco
-  class SetupGenerator < Rails::Generators::NamedBase
+  class SetupGenerator < Rails::Generators::Base
     include ModelGenerator
     include RakesGenerator
     include MigrationsGenerator
@@ -18,8 +18,10 @@ class Gioco
 
 
     def execute
+      @model_name = ask("What is your resource model? (eg. user)")
       generate_models
       creating_templates
+      # adding_methods
       add_validations
       setup_relations
       create_rakes
