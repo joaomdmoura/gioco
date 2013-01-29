@@ -18,10 +18,8 @@ module ModelGenerator
   end
 
   def adding_methods
-    contents = File.read('generators/templates/resource.rb')
-    p contents
-    p "================================================"
-    add_method(@model_name, "lol")
+    contents = File.read find_in_source_paths("resource.rb")
+    inject_into_class "app/models/#{@model_name}.rb", @model_name.capitalize, "\n#{contents}\n"
   end
 
   def setup_relations
@@ -51,24 +49,13 @@ module ModelGenerator
 
   private
 
-    def add_relationship (model, related, relation, through = false, dependent = false)
-      gsub_file "app/models/#{model}.rb", get_class_header(model), "#{get_class_header(model)}
-      #{relation} :#{related} #{(through) ? ", :through => :#{through}" : ""} #{(dependent) ? ", :dependent => :#{dependent}" : ""}"
-    end
+  def add_relationship (model, related, relation, through = false, dependent = false)
+    inject_into_class "app/models/#{model}.rb", model.capitalize, "#{relation} :#{related} #{(through) ? ", :through => :#{through}" : ""} #{(dependent) ? ", :dependent => :#{dependent}" : ""}\n"
+  end
 
-    def add_validation (model, field, validations = [])
-      validations.each do |validation|
-        gsub_file "app/models/#{model}.rb", get_class_header(model), "#{get_class_header(model)}
-        validates :#{field}, :#{validation[0]} => #{validation[1]}"
-      end
+  def add_validation (model, field, validations = [])
+    validations.each do |validation|
+      inject_into_class "app/models/#{model}.rb", model.capitalize, "validates :#{field}, :#{validation[0]} => #{validation[1]}\n"
     end
-
-    def add_method (model, method)
-      gsub_file "app/models/#{model}.rb", get_class_header(model), "#{get_class_header(model)}
-      #{method}"
-    end
-
-    def get_class_header (model_name)
-      "class #{model_name.capitalize} < ActiveRecord::Base"
-    end
+  end
 end
