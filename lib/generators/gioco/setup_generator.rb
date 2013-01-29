@@ -21,7 +21,7 @@ class Gioco
       @model_name = ask("What is your resource model? (eg. user)")
       generate_models
       creating_templates
-      # adding_methods
+      adding_methods
       add_validations
       setup_relations
       create_rakes
