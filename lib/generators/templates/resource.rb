@@ -1,5 +1,12 @@
-def change_points(points, type_id = false)
-  type              = (type_id) ? Type.find(type_id) : false
+def change_points(options)
+  if Gioco::Core::TYPES
+    type_id = options[:type]
+    points  = options[:points]
+  else
+    points  = options
+  end
+  type      = (type_id) ? Type.find(type_id) : false
+
   if Gioco::Core::TYPES
     raise "Missing Type Identifier argument" if !type_id
     old_pontuation  = self.points.where(:type_id => type_id).sum(:value)
