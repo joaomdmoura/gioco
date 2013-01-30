@@ -18,7 +18,7 @@ module ModelGenerator
   end
 
   def adding_methods
-    contents = File.read find_in_source_paths("resource.rb")
+    contents = File.read "#{source_paths[0]}/resource.rb"
     inject_into_class "app/models/#{@model_name}.rb", @model_name.capitalize, "\n#{contents}\n"
   end
 
