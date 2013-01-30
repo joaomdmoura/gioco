@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Gioco::Badges do  
+describe Gioco do  
   let(:user) { FactoryGirl.create(:user) }
   let(:type) { Type.find_by_name "comments" }
   let(:noob_badge) { Badge.find_by_name "noob" }
@@ -11,7 +11,7 @@ describe Gioco::Badges do
     context "Adding a badge to an user" do
 
       it "Add the noob badge and the points related to an user" do
-        Gioco::Badges.add( user.id, noob_badge.id )
+        noob_badge.add(user.id)
         user.reload
         user.badges.should include noob_badge
         user.points.where(:type_id => type.id).sum(:value) == noob_badge.points
@@ -23,12 +23,12 @@ describe Gioco::Badges do
 
       before(:all) do
         Point.destroy_all
-        Gioco::Badges.add( user.id, noob_badge.id )
-        Gioco::Badges.add( user.id, medium_badge.id )        
+        noob_badge.add(user.id)
+        medium_badge.add(user.id)
       end
 
       it "Remove the medium badge and the points related" do
-        Gioco::Badges.remove( user.id, medium_badge.id )
+        medium_badge.remove(user.id)
         user.reload
         user.badges.should_not include medium_badge
         user.points.where(:type_id => type.id).sum(:value) == noob_badge.points

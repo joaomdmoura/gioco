@@ -13,9 +13,9 @@ describe Gioco::Ranking do
 
     before(:all) do
       User.delete_all
-      Gioco::Badges.add( user_a.id, noob_badge.id )
-      Gioco::Badges.add( user_b.id, hard_badge.id )
-      Gioco::Badges.add( user_c.id, medium_badge.id )
+      noob_badge.add(user_a.id)
+      hard_badge.add(user_b.id)
+      medium_badge.add(user_c.id)
     end
 
     it "Return the users ordered by their badges and points" do
