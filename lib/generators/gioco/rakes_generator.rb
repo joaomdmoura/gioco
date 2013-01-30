@@ -12,8 +12,7 @@ namespace :gioco do
 
 
     if !args.name #{"|| !args.points" if options[:points]}#{" || !args.type" if options[:types]}
-      puts "There are missing some arguments"
-      abort
+      raise "There are missing some arguments"
     else
       badge_string = "#{options[:types] ? 'type = Type.find_or_create_by_name(\'#{args.type}\')\n' : ''}"
 
@@ -55,8 +54,7 @@ namespace :gioco do
 
   task :remove_badge, [:name#{", :type" if options[:types]}] => :environment do |t, args|
     if !args.name#{" || !args.type" if options[:types]}
-      puts "There are missing some arguments"
-      abort
+      raise "There are missing some arguments"
     else
       badge_string = "#{"type = Type.find_by_name('\#\{args.type\}')" if options[:types]}
       badge = Badge.where( :name => '\#\{args.name\}'#{", :type_id => type.id" if options[:types]} ).first
@@ -77,15 +75,13 @@ if options[:types]
   desc "Removes a given type"
   task :remove_type, [:name] => :environment do |t, args|
     if !args.name
-      puts "There are missing some arguments"
-      abort
+      raise "There are missing some arguments"
     else
       type_string = "type = Type.find_by_name( \'#{args.name}\' )\n"
       type_string = type_string + "if type.badges.empty?
         type.destroy
       else
-        puts \'Aborted! There are badges related with this type.\'
-        abort
+        raise \'Aborted! There are badges related with this type.\'
       end\n"
     end
     type_string = type_string + "puts \'> Type successfully removed\'"
