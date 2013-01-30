@@ -18,8 +18,10 @@ module ModelGenerator
   end
 
   def adding_methods
-    contents = File.read find_in_source_paths("resource.rb")
-    inject_into_class "app/models/#{@model_name}.rb", @model_name.capitalize, "\n#{contents}\n"
+    resource = File.read find_in_source_paths("resource.rb")
+    badge    = File.read find_in_source_paths("badge.rb")
+    inject_into_class "app/models/#{@model_name}.rb", @model_name.capitalize, "\n#{resource}\n"
+    inject_into_class "app/models/badge.rb", "Badge", "\n#{badge}\n"
   end
 
   def setup_relations
