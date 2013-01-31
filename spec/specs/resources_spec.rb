@@ -38,7 +38,6 @@ describe Gioco do
         end
         user.points.where(:type_id => type.id).sum(:value).should == final_score
       end
-
     end
 
     context "Decressing points to an user loose meidum badge" do
@@ -53,9 +52,24 @@ describe Gioco do
         user.badges.should_not include medium_badge
         user.points.where(:type_id => type.id).sum(:value) == 0
       end
-
     end
-
   end
 
+  context "Getting resource data related with next badge" do
+
+    it "should return a hash with the info for the noob_badge" do
+      user.next_badge?(type.id).should == { :badge=> noob_badge,
+                                            :points=> noob_badge.points,
+                                            :percentage=> 0
+                                          }
+    end
+
+    it "should return a hash with the info for the medium_badge" do
+      noob_badge.add user.id
+      user.next_badge?(type.id).should == { :badge=> medium_badge,
+                                            :points=> medium_badge.points - user.points.sum(:value),
+                                            :percentage=>(user.points.sum(:value) - user.badges.last.points)*100/(medium_badge.points - user.badges.last.points)
+                                          }
+    end
+  end
 end

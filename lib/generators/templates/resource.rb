@@ -25,9 +25,12 @@ def next_badge?(type_id = false)
   else
     old_pontuation  = self.points.to_i
   end
-  next_badge      = Badge.where("points > #{old_pontuation}").order("points ASC").first
+  next_badge       = Badge.where("points > #{old_pontuation}").order("points ASC").first
+  last_badge_point = self.badges.last.try('points')
+  last_badge_point ||= 0
+
   if next_badge
-    percentage      = (next_badge.points - old_pontuation)*100/next_badge.points
+    percentage      = (old_pontuation - last_badge_point)*100/(next_badge.points - last_badge_point)
     points          = next_badge.points - old_pontuation
     next_badge_info = { 
                         :badge      => next_badge,
