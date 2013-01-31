@@ -1,6 +1,6 @@
 ![Alt text](http://joaomdmoura.github.com/gioco/assets/images/new_logo.png "A gamification gem for Ruby on Rails applications")
 
-# Gioco (current version - 0.3.6)
+# Gioco (current version - 1.0.0)
 A **gamification** gem to Ruby on Rails applications
 
 ![Alt text](https://secure.travis-ci.org/joaomdmoura/gioco.png?branch=master "Travis CI")
@@ -16,11 +16,9 @@ For more information just keep reading.
 
 Installation
 ------------
-Gioco is available through [Rubygems](http://rubygems.org/gems/gioco) and can be installed via:
-```
-$ gem install gioco
-```
-Or adding it in Gemfile
+Gioco is available through [Rubygems](http://rubygems.org/gems/gioco) and can be installed by:
+
+adding it in Gemfile
 ```
 gem 'gioco'
 ```
@@ -34,23 +32,23 @@ Setup
 ------------
 **To setup gioco with you application**
 
-The MODEL_NAME should be replaced for the model you want to be, as gioco treat, the resource of the gamification. (eg. user )
 Gioco have two optionals setup parameters, ``` --points ``` and ``` --types ```, it can be used togheter or not.
+The **Resource Model name** will be asked for the setup generator, it's what you want to be, as gioco treat, the resource of the gamification. (eg. user )
 
 Example.
 
 ```
-rails g gioco:setup MODEL_NAME --points --types;
+rails g gioco:setup --points --types;
 ```
 
 or
 
 ```
-rails g gioco:setup MODEL_NAME;
+rails g gioco:setup;
 ```
 
 The optional ``` --points ``` argument will setup the gioco with a points system.
-And the optional argument ``` --types ```, provide an environment of multiple types of badges and points ( If the oprtion ``` --points ``` is being used too ). 
+And the optional argument ``` --types ```, provide an environment of multiple types of badges and points ( If the option ``` --points ``` is being used too ).
 You can read more about how the badge, level and points implementation work at the [Documentation](http://joaomdmoura.github.com/gioco/)
 
 
@@ -58,28 +56,29 @@ Usage
 ------------
 
 ###Badge
-After setup gioco with you application you are able to add or remove Badges as you want using the following commands:
+After setup gioco in you application, you'll be able to add and remove **Badges** as you want, using the following commands:
+
 PS. The boolean DEFAULT option is responsible to add a specific badge to all your **current** resources registrations.
 
 ####Add Bagde
 
-To add Badges you will use rake tasks, the arguments will changing according the setup arguments that you used:
+To add Badges you will use rake tasks, the arguments will changing **according the setup arguments** that you used:
 
 Examples.
 
 With ```--points``` option:
 ```
-	rake gioco:add_badge[BADGE_NAME, POINTS, DEFAULT]
+	rake gioco:add_badge[BADGE_NAME, POINTS_NUMBER, DEFAULT]
 ```
 
 With ```--types``` option:
 ```
-	rake gioco:add_badge[BADGE_NAME, TYPE, DEFAULT]
+	rake gioco:add_badge[BADGE_NAME, TYPE_NAME, DEFAULT]
 ```
 
 With ```--points``` and ```--types``` option:
 ```
-	rake gioco:add_badge[BADGE_NAME, POINTS, TYPE, DEFAULT]
+	rake gioco:add_badge[BADGE_NAME, POINTS_NUMBER, TYPE_NAME, DEFAULT]
 ```
 
 Without ```--points``` and ```--types``` option:
@@ -114,11 +113,11 @@ Example.
   rake gioco:remove_type[TYPE_NAME]
 ```
 
-If the type has badges, you must remove badges first.
+It's only possible when there it no badges related with this type, so, before you destroy a type you must detroy all badges that belong to it.
 
 ###Methods
 
-After adding the badges as you wish, you will gonna have to start to use it inside your application, and to do this, Gioco will provide some methods that will allow you to easily apply any logic that you might to have without being concerned about small details.
+After adding the badges as you wish, you will gonna have to start to use it inside your application, and to do this, Gioco will provide some methods that will allow you to easily apply any logic that you might to have, without being concerned about small details.
 
 Those methods are:
 
