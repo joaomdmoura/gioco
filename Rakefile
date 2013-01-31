@@ -9,16 +9,16 @@ RSpec::Core::RakeTask.new(:spec) do |t|
   t.pattern = ['./spec/**/*_spec.rb', './spec/**/*_fac.rb']
 end
 
-desc 'Generates a dummy app for testing'
+desc 'Generates a full dummy app for testing'
 task :dummy => [
-                    :removing_app,
-                    :generating_app,
-                    :support_files,
-                    :setup,
-                    :cleanning_project,
-                    :trash_badges,
-                    :adding_badges
-                  ]
+                  :removing_app,
+                  :generating_app,
+                  :support_files,
+                  :setup,
+                  :cleanning_project,
+                  :trash_badges,
+                  :adding_badges
+                ]
 
 test   = File.expand_path('../spec/dummy', __FILE__)
 config = File.expand_path('../spec/support/config', __FILE__)
