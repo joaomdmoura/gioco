@@ -68,23 +68,23 @@ Examples.
 
 With ```--points``` option:
 ```
-	rake gioco:add_badge[BADGE_NAME, POINTS_NUMBER, DEFAULT]
+	rake gioco:add_badge[BADGE_NAME,POINTS_NUMBER,DEFAULT]
 ```
 
 With ```--types``` option:
 ```
-	rake gioco:add_badge[BADGE_NAME, TYPE_NAME, DEFAULT]
+	rake gioco:add_badge[BADGE_NAME,TYPE_NAME,DEFAULT]
 ```
 
 With ```--points``` and ```--types``` option:
 ```
-	rake gioco:add_badge[BADGE_NAME, POINTS_NUMBER, TYPE_NAME, DEFAULT]
+	rake gioco:add_badge[BADGE_NAME,POINTS_NUMBER,TYPE_NAME,DEFAULT]
 ```
 
 Without ```--points``` and ```--types``` option:
 
 ```
-	rake gioco:add_badge[BADGE_NAME, DEFAULT]
+	rake gioco:add_badge[BADGE_NAME,DEFAULT]
 ```
 
 ####Remove Badge
@@ -95,7 +95,7 @@ Example.
 
 With ```--types``` option:
 ```
-	rake gioco:remove_badge[BADGE_NAME, TYPE_NAME]
+	rake gioco:remove_badge[BADGE_NAME,TYPE_NAME]
 ```
 
 Without ```--types``` option:
