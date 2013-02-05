@@ -1,33 +1,32 @@
 def add(resource_id)
   resource = Gioco::Core.get_resource(resource_id)
-  badge    = self
 
-  if Gioco::Core::POINTS && !resource.badges.include?(badge)
+  if Gioco::Core::POINTS && !resource.badges.include?(self)
     if Gioco::Core::TYPES
-      Gioco::Core.sync_resource_by_points(resource, badge.points, badge.type)
+      Gioco::Core.sync_resource_by_points(resource, self.points, self.type)
     else
-      Gioco::Core.sync_resource_by_points(resource, badge.points)
+      Gioco::Core.sync_resource_by_points(resource, self.points)
     end
-  elsif !resource.badges.include?(badge)
-    resource.badges << badge
-    return badge
+  elsif !resource.badges.include?(self)
+    resource.badges << self
+    return self
   end
 end
 
 def remove(resource_id)
   resource = Gioco::Core.get_resource(resource_id)
-  badge    = self
 
-  if Gioco::Core::POINTS && resource.badges.include?(badge)
+  if Gioco::Core::POINTS && resource.badges.include?(self)
     if Gioco::Core::TYPES
-      type       = badge.type
-      badges_gap = Badge.where( "points < #{badge.points} AND type_id = #{type.id}" )[0]
+      type       = self.type
+      badges_gap = Badge.where( "points < #{self.points} AND type_id = #{type.id}" )[0]
       Gioco::Core.sync_resource_by_points( resource, ( badges_gap.nil? ) ? 0 : badges_gap.points, type)
     else
-      badges_gap = Badge.where( "points < #{badge.points}" )[0]
+      badges_gap = Badge.where( "points < #{self.points}" )[0]
       Gioco::Core.sync_resource_by_points( resource, ( badges_gap.nil? ) ? 0 : badges_gap.points)
     end
-  elsif resource.badges.include?(badge)
-    resource.levels.where( :badge_id => badge.id )[0].destroy
+  elsif resource.badges.include?(self)
+    resource.levels.where( :badge_id => self.id )[0].destroy
+    return self
   end
 end
