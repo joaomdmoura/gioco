@@ -60,7 +60,7 @@ After setup gioco in you application, you'll be able to add and remove **Badges*
 
 PS. The boolean DEFAULT option is responsible to add a specific badge to all your **current** resources registrations.
 
-####Add Bagde
+####Creating Badges
 
 To add Badges you will use rake tasks, the arguments will changing **according the setup arguments** that you used:
 
@@ -87,7 +87,7 @@ Without ```--points``` and ```--types``` option:
 	rake gioco:add_badge[BADGE_NAME,DEFAULT]
 ```
 
-####Remove Badge
+####Destroying Badges
 
 And to remove Badges use:
 
@@ -103,7 +103,7 @@ Without ```--types``` option:
 	rake gioco:remove_badge[BADGE_NAME]
 ```
 
-####Remove Type
+####Destroying Types
 
 To remove Types use:
 
@@ -115,33 +115,80 @@ Example.
 
 It's only possible when there it no badges related with this type, so, before you destroy a type you must detroy all badges that belong to it.
 
-###Methods
 
-After adding the badges as you wish, you will gonna have to start to use it inside your application, and to do this, Gioco will provide some methods that will allow you to easily apply any logic that you might to have, without being concerned about small details.
+Methods
+------------
 
-Those methods are:
+####Let's assume that you have setup gioco defining your **User** model as the **Resource**
+
+After adding the badges as you wish, you will have to start to use it inside your application, and to do this, Gioco will provide and attach some methods that will allow you to easily apply any logic that you might have, without being concerned about small details.
+
+###Resource Methods
 
 Resource is the focus of your gamification logic and it should be defined in you setup process.
+
+####Change Points
+
+Updating, adding or subtactring some amount of points of a resource. It will also remove or add the badges that was affected by the ponctuation change.
+**It will return the a hash with the info related of the badges added or removed.**
 This method only is usefull when you setup the Gioco with the points system.
+
 **Ps. Type_id should be used only when you already used it as a setup argument**
 
 ```
-Gioco::Resources.change_points( Resource_id, Points, Type_id )
+user = User.find(1)
+user.change_points({ points: Points, type_id: Type_id })
 ```
 
-The Badge.add method is responsable to add a specific badge to some resource.
+If you have setup Giogo without ```--type``` then you shoul only pass the points argument instead of a hash:
 
 ```
-Gioco::Badges.add( Resource_id, Badge_id )
+user = User.find(1)
+user.change_points(Points)
 ```
 
-The Badge.remove method is used to remove a badge of a resource.
+####Next Badge?
+
+Return the next badge information, including percent and points info.
+**Ps. Type_id should be used only when you already used it as a setup argument**
 
 ```
-Gioco::Badges.remove( Resource_id, Badge_id )
+user = User.find(1)
+user.next_badge?(Type_id)
 ```
 
-###Ranking
+####Get Badges
+
+To get the badges or levels of you resource all you have to do is:
+
+```
+user = User.find(1)
+user.badges
+```
+
+###Badges Methods
+
+####Add
+
+Add a Badge to a specific resource, **it will return the badge added, or if you are using points system it will return a hash with all badges that ahd been added**
+
+```
+badge = Badge.find(1)
+badge.add(Resource_id)
+```
+
+####Remove
+
+Remove a Badge of a specific resource, **it will return the badge removed, or if you are using points system it will return a hash with all badges that ahd been removed**
+
+```
+badge = Badge.find(1)
+badge.remove(Resource_id)
+```
+
+###Ranking Methods
+
+####Generate
 
 Gioco provide a method to list all Resources in a ranking inside of an array, the result format will change according the setup arguments you used ( ```--points``` or/and ```--types``` ):
 
@@ -149,22 +196,18 @@ Gioco provide a method to list all Resources in a ranking inside of an array, th
 Gioco::Ranking.generate
 ```
 
-###Get Badged and Levels
-
-To get the badges or levels of you resource all you have to do is: (replace RESOURCE_NAME for your resource model name)
-
-```
-RESOURCE_NAME.badges
-RESOURCE_NAME.levels
-```
-
 
 Example
 ------------
-All basic usage flow to add gioco in an application using User as resource:
+All basic usage flow to add gioco in an application:
+
+####Let's assume that you have setup gioco defining your **User** model as the **Resource**
 
 ```
-> rails g gioco:setup user --points --types;
+> rails g gioco:setup --points --types;
+...
+What is your resource model? (eg. user)
+> user
 ```
 
 Adding badges to the system using rake tasks, you badges have a pontuation and a type in this case cause I setup gioco using ```--points``` and ```--types``` arguments.
@@ -185,22 +228,32 @@ Now the gioco is already installed and synced with the applciation and six badge
 
 The both defaults badge ( noob ) already was added to all users that we already have in our database.
 
-Inside you application if we wanna give 100 points to some user, inside your function you have to use the follow method already showed:
+Inside your application if you want to give 100 points to some user, inside your function you have to use the following method:
 
 ```
-type =  Type.where( :name => "teacher" )
+type =  Type.where(:name => "teacher")
+user = User.find(1)
 
-Gioco::Resources.change_points( user.id, 100, type.id )
+user.change_points({ points: 100, type_id: type.id })
 ```
 
-Or if you wanna add or remove some badge ( consequently the gioco will add or remove the necessary points ):
+Or if you wanna add or remove some badge **(consequently the gioco will add or remove the necessary points)**:
 
 ```
-badge = Badge.where( :name => speaker )
+badge = Badge.where(:name => speaker)
+user  = User.find(1)
 
-Gioco::Badge.add( user.id , badge.id )
+badge.add(user.id)
+badge.remove(user.id)
+```
 
-Gioco::Badge.remove( user.id , badge.id )
+Get the iformation related to the next badge that the user want to earn:
+
+```
+type =  Type.where(:name => "teacher")
+user = User.find(1)
+
+user.next_badge?(type.id)
 ```
 
 To get a ranking of all resources all you need is call:
