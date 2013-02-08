@@ -76,19 +76,25 @@
 
 					To add Badges, use:<br />
 					With --points option:<br />
-					<div class="code">rake gioco:add_badge[BADGE_NAME,POINTS,DEFAULT]</div>
+					<div class="code">rake gioco:add_badge[BADGE_NAME,POINTS_NUMBER,DEFAULT]</div>
 
 					With --types option:<br />
-					<div class="code">rake gioco:add_badge[BADGE_NAME,TYPE,DEFAULT]</div>
+					<div class="code">rake gioco:add_badge[BADGE_NAME,TYPE_NAME,DEFAULT]</div>
 
 					With --points and --types option:<br />
-					<div class="code">rake gioco:add_badge[BADGE_NAME,POINTS,TYPE,DEFAULT]</div>
+					<div class="code">rake gioco:add_badge[BADGE_NAME,POINTS_NUMBER,TYPE_NAME,DEFAULT]</div>
 
 					Without --points and --types option:<br />
     			<div class="code">rake gioco:add_badge[BADGE_NAME,DEFAULT]</div>
 
 					And to remove Badges, use:<br />
+
+					With --types option:<br />
+					<div class="code">rake gioco:remove_badge[BADGE_NAME,TYPE_NAME]</div>
+
+					Without --types option:<br />
 					<div class="code">rake gioco:remove_badge[BADGE_NAME]</div>
+
 					<br/><br />
 
 					<span class="subtitle">Methods</span>
@@ -98,29 +104,45 @@
 					<span class="subtitle2">Resource</span><br/>
 
 					<span class="highlight">Change Points</span>
-					<div class="code">Gioco::Resources.change_points( Resource_id, Points, Type_id )</div>
+
 					This method is useful only when you setup the Gioco with the points system.<span class="highlight">Type_id</span> should be used only when you already used it as a setup argument<br /><br />
+					<div class="code">user = User.find(1)<br />user.change_points({ points: Points, type_id: Type_id })</div>
+
+					If you have setup Giogo without <span class="highlight">--type</span> then you shoul only pass the points argument instead of a hash:<br /><br />
+					<div class="code">user = User.find(1)<br />user.change_points(Points)</div>
+
+					<span class="highlight">Next Badge?</span>
+					
+					Return the next badge information, including percent and points info.
+					<span class="highlight">Type_id should be used only when you already used it as a setup argument</span>
+					<br /><br />
+					<div class="code">user = User.find(1)<br />user.next_badge?(Type_id)</div>
+
+					If you have setup Giogo without <span class="highlight">--type</span> then you shouldn't pass any argument:<br /><br />
+					<div class="code">user = User.find(1)<br />user.next_badge?()</div>
+
+					<span class="highlight">Get Badges and Points</span>
+					
+					To get the badges or points of you resource all you have to do is:
+					<br /><br />
+					<div class="code">user = User.find(1)<br />user.badges<br />user.points</div>
+
 
 					<span class="subtitle2">Badges</span><br/>
 
 					<span class="highlight">Add</span>
-					<div class="code">Gioco::Badge.add( Resource_id, Badge_id )</div>
-					The Badge.add method is responsible for adding a specific badge to a resource.<br/><br />
+					Add a Badge to a specific resource, <span class="highlight">it will return the badge added, or if you are using points system it will return a hash with all badges that ahd been added</span>.<br/><br />
+					<div class="code">badge = Badge.find(1)<br />badge.add(Resource_id)</div>
 
 					<span class="highlight">Remove</span>
-					<div class="code">Gioco::Badge.remove( Resource_id, Badge_id )</div>
-					The Badge.remove method is used to remove a badge of a resource.<br/><br />
+					Remove a Badge of a specific resource, <span class="highlight">it will return the badge removed, or if you are using points system it will return a hash with all badges that ahd been removed</span><br/><br />
+					<div class="code">badge = Badge.find(1)<br />badge.remove(Resource_id)</div>
 
 					<span class="subtitle2">Ranking</span><br/>
 
 					<span class="highlight">Generate</span>
 					<div class="code">Gioco::Ranking.generate</div>
 					This method returns an array with a ranking of all your resources ordered by points or quantity of badges, the result format will change according to the setup arguments you have used ( <span class="highlight">--points</span> and/or <span class="highlight">--types</span> ):br /><br />
-
-					<span class="subtitle">Application</span>
-					<br />
-					Inside your application you might have to get <span class="highlight">Badges</span>, <span class="highlight">Levels</span> or <span class="highlight">Points</span> data. And you are able to do this using (replace <span class="highlight">RESOURCE_NAME</span> for your resource model name) :<br/>
-					<div class="code">RESOURCE_NAME.badges<br/>RESOURCE_NAME.levels<br/>RESOURCE_NAME.points</div>
 
 				</div>
 			</div>
