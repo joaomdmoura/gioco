@@ -19,7 +19,7 @@ Installation
 Gioco is available through [Rubygems](http://rubygems.org/gems/gioco) and can be installed by:
 
 adding it in Gemfile
-```
+```ruby
 gem 'gioco'
 ```
 and running the bundler
@@ -135,16 +135,16 @@ This method only is usefull when you setup the Gioco with the points system.
 
 **Ps. Type_id should be used only when you already used it as a setup argument**
 
-```
+```ruby
 user = User.find(1)
-user.change_points({ points: Points, type_id: Type_id })
+user.change_points({ points: Points, type_id: Type_id }) #Add or Subtract some amount of points of a type
 ```
 
 If you have setup Giogo without ```--type``` then you shoul only pass the points argument instead of a hash:
 
-```
+```ruby
 user = User.find(1)
-user.change_points(Points)
+user.change_points(Points) #Add or Subtract some amount of points
 ```
 
 ####Next Badge?
@@ -152,18 +152,18 @@ user.change_points(Points)
 Return the next badge information, including percent and points info.
 **Ps. Type_id should be used only when you already used it as a setup argument**
 
-```
+```ruby
 user = User.find(1)
-user.next_badge?(Type_id)
+user.next_badge?(Type_id) #Returns the information related to the next badge the user should win
 ```
 
 ####Get Badges
 
 To get the badges or levels of you resource all you have to do is:
 
-```
+```ruby
 user = User.find(1)
-user.badges
+user.badges #Return all user badges
 ```
 
 ###Badges Methods
@@ -172,18 +172,18 @@ user.badges
 
 Add a Badge to a specific resource, **it will return the badge added, or if you are using points system it will return a hash with all badges that ahd been added**
 
-```
+```ruby
 badge = Badge.find(1)
-badge.add(Resource_id)
+badge.add(Resource_id) #Add a badge to a user
 ```
 
 ####Remove
 
 Remove a Badge of a specific resource, **it will return the badge removed, or if you are using points system it will return a hash with all badges that ahd been removed**
 
-```
+```ruby
 badge = Badge.find(1)
-badge.remove(Resource_id)
+badge.remove(Resource_id) #Remove a badge from a user
 ```
 
 ###Ranking Methods
@@ -192,8 +192,8 @@ badge.remove(Resource_id)
 
 Gioco provide a method to list all Resources in a ranking inside of an array, the result format will change according the setup arguments you used ( ```--points``` or/and ```--types``` ):
 
-```
-Gioco::Ranking.generate
+```ruby
+Gioco::Ranking.generate #Return a object with the ranking of users
 ```
 
 
@@ -230,7 +230,7 @@ The both defaults badge ( noob ) already was added to all users that we already 
 
 Inside your application if you want to give 100 points to some user, inside your function you have to use the following method:
 
-```
+```ruby
 type =  Type.where(:name => "teacher")
 user = User.find(1)
 
@@ -239,7 +239,7 @@ user.change_points({ points: 100, type_id: type.id })
 
 Or if you wanna add or remove some badge **(consequently the gioco will add or remove the necessary points)**:
 
-```
+```ruby
 badge = Badge.where(:name => speaker)
 user  = User.find(1)
 
@@ -249,7 +249,7 @@ badge.remove(user.id)
 
 Get the iformation related to the next badge that the user want to earn:
 
-```
+```ruby
 type =  Type.where(:name => "teacher")
 user = User.find(1)
 
@@ -258,7 +258,7 @@ user.next_badge?(type.id)
 
 To get a ranking of all resources all you need is call:
 
-```
+```ruby
 Gioco:Ranking:generate
 ```
 
