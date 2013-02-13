@@ -19,10 +19,10 @@ def remove(resource_id)
   if Gioco::Core::POINTS && resource.badges.include?(self)
     if Gioco::Core::TYPES
       type       = self.type
-      badges_gap = Badge.where( "points < #{self.points} AND type_id = #{type.id}" )[0]
+      badges_gap = Badge.where( "points < #{self.points} AND type_id = #{type.id}" ).order('points DESC')[0]
       Gioco::Core.sync_resource_by_points( resource, ( badges_gap.nil? ) ? 0 : badges_gap.points, type)
     else
-      badges_gap = Badge.where( "points < #{self.points}" )[0]
+      badges_gap = Badge.where( "points < #{self.points}" ).order('points DESC')[0]
       Gioco::Core.sync_resource_by_points( resource, ( badges_gap.nil? ) ? 0 : badges_gap.points)
     end
   elsif resource.badges.include?(self)
