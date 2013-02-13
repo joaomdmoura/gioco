@@ -27,12 +27,12 @@ class Gioco
           if old_pontuation < points
             if !resource.badges.include?(badge)
               resource.badges << badge
-              badges[:added] = []
+              badges[:added] = [] if badges[:added].nil?
               badges[:added] << badge
             end
           elsif old_pontuation > points
             resource.levels.where( :badge_id => badge.id )[0].destroy
-            badges[:removed] = []
+            badges[:removed] = [] if badges[:removed].nil?
             badges[:removed] << badge
           end
         end
