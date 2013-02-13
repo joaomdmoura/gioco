@@ -5,6 +5,7 @@ describe Gioco do
   let(:type) { Type.find_by_name "comments" }
   let(:noob_badge) { Badge.find_by_name "noob" }
   let(:medium_badge) { Badge.find_by_name "medium" }
+  let(:hard_badge) { Badge.find_by_name "hard" }
 
   describe "Get a new resource and add and remove badges to it" do
 
@@ -24,14 +25,14 @@ describe Gioco do
       before(:all) do
         Point.destroy_all
         noob_badge.add(user.id)
-        medium_badge.add(user.id)
+        hard_badge.add(user.id)
       end
 
       it "Remove the medium badge and the points related" do
-        medium_badge.remove(user.id)
+        hard_badge.remove(user.id)
         user.reload
-        user.badges.should_not include medium_badge
-        user.points.where(:type_id => type.id).sum(:value) == noob_badge.points
+        user.badges.should_not include hard_badge
+        user.points.where(:type_id => type.id).sum(:value) == medium_badge.points
       end
 
     end
