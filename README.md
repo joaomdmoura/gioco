@@ -263,7 +263,7 @@ user.next_badge?(type.id)
 To get a ranking of all resources all you need is call:
 
 ```ruby
-Gioco:Ranking:generate
+Gioco::Ranking.generate
 ```
 
 License
