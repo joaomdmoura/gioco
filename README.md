@@ -1,6 +1,6 @@
 ![Alt text](http://joaomdmoura.github.com/gioco/assets/images/new_logo.png "A gamification gem for Ruby on Rails applications")
 
-# Gioco (current version - 1.0.0)
+# Gioco (current version - 1.0.1)
 A **gamification** gem to Ruby on Rails applications
 
 ![Alt text](https://secure.travis-ci.org/joaomdmoura/gioco.png?branch=master "Travis CI")
