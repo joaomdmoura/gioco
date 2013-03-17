@@ -141,7 +141,7 @@ This method only is usefull when you setup the Gioco with the points system.
 
 ```ruby
 user = User.find(1)
-user.change_points({ points: Points, type_id: Type_id }) #Add or Subtract some amount of points of a type
+user.change_points({ points: Points, type: Type_id }) #Add or Subtract some amount of points of a type
 ```
 
 If you have setup Giogo without ```--type``` then you shoul only pass the points argument instead of a hash:
@@ -238,7 +238,7 @@ Inside your application if you want to give 100 points to some user, inside your
 type =  Type.where(:name => "teacher")
 user = User.find(1)
 
-user.change_points({ points: 100, type_id: type.id })
+user.change_points({ points: 100, type: type.id })
 ```
 
 Or if you wanna add or remove some badge **(consequently the gioco will add or remove the necessary points)**:
