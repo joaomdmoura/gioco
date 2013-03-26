@@ -34,7 +34,7 @@ $ bundle install
 
 Setup
 ------------
-**To setup gioco with you application**
+**To setup gioco with your application**
 
 Gioco have two optionals setup parameters, ``` --points ``` and ``` --types ```, it can be used togheter or not.
 The **Resource Model name** will be asked for the setup generator, it's what you want to be, as gioco treat, the resource of the gamification. (eg. user )
