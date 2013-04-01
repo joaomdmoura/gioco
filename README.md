@@ -5,6 +5,8 @@ A **gamification** gem to Ruby on Rails applications
 
 ![Alt text](https://secure.travis-ci.org/joaomdmoura/gioco.png?branch=master "Travis CI")
 ![Dependency Status](https://gemnasium.com/joaomdmoura/gioco.png)
+[![Code
+Climate](https://codeclimate.com/github/joaomdmoura/gioco.png)](https://codeclimate.com/github/joaomdmoura/gioco)
 
 Description
 ------------
