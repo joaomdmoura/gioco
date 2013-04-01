@@ -3,8 +3,12 @@
 # Gioco (current version - 1.0.1)
 A **gamification** gem to Ruby on Rails applications
 
-![Alt text](https://secure.travis-ci.org/joaomdmoura/gioco.png?branch=master "Travis CI")
-![Dependency Status](https://gemnasium.com/joaomdmoura/gioco.png)
+[![Build
+Status](https://travis-ci.org/joaomdmoura/gioco.png?branch=master)](https://travis-ci.org/joaomdmoura/gioco)
+[![Dependency
+Status](https://gemnasium.com/joaomdmoura/gioco.png)](https://gemnasium.com/joaomdmoura/gioco)
+[![Code
+Climate](https://codeclimate.com/github/joaomdmoura/gioco.png)](https://codeclimate.com/github/joaomdmoura/gioco)
 
 Description
 ------------
