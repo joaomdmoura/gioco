@@ -7,6 +7,7 @@ A **gamification** gem to Ruby on Rails applications
 Status](https://travis-ci.org/joaomdmoura/gioco.png?branch=master)](https://travis-ci.org/joaomdmoura/gioco)
 [![Dependency
 Status](https://gemnasium.com/joaomdmoura/gioco.png)](https://gemnasium.com/joaomdmoura/gioco)
+[![Coverage Status](https://coveralls.io/repos/joaomdmoura/gioco/badge.png?branch=master)](https://coveralls.io/r/joaomdmoura/gioco)
 [![Code
 Climate](https://codeclimate.com/github/joaomdmoura/gioco.png)](https://codeclimate.com/github/joaomdmoura/gioco)
 
