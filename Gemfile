@@ -1,4 +1,4 @@
-source :rubygems
+source 'https://rubygems.org'
 gemspec
 
 gem 'rake',               '10.0.3'
@@ -8,3 +8,4 @@ gem 'rails',              '3.2.12'
 gem 'factory_girl_rails', '4.2.1'
 gem 'coveralls', require: false
 gem 'sqlite3'
+
