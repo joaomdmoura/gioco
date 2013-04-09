@@ -13,8 +13,8 @@ Climate](https://codeclimate.com/github/joaomdmoura/gioco.png)](https://codeclim
 
 Description
 ------------
-Gioco is a easy-to-implement gamification gem based on plug and play concept.
-With Gioco you are able to implement any logic you could have with a badge, level and points implementation.
+Gioco is a easy-to-implement gamification gem based on plug and play concepts.
+With Gioco you are able to implement any standard gamification logic such as badges, levels and points / currencies.
 Dosen't matter if you already have a full and functional database, Gioco will smoothly integrate everything and provide all methods that you might need.
 For more information just keep reading.
 
@@ -41,10 +41,11 @@ Setup
 ------------
 **To setup gioco with your application**
 
-Gioco have two optionals setup parameters, ``` --points ``` and ``` --types ```, it can be used togheter or not.
-The **Resource Model name** will be asked for the setup generator, it's what you want to be, as gioco treat, the resource of the gamification. (eg. user )
+Gioco has two optional setup parameters, ``` --points ``` and ``` --types ```.
+These can be used together, or separate.
 
-Example.
+Next, you will be prompted to provide your `Resource Model`.
+This is generally the `User` model.
 
 ```
 rails g gioco:setup --points --types;
@@ -56,49 +57,48 @@ or
 rails g gioco:setup;
 ```
 
-The optional ``` --points ``` argument will setup the gioco with a points system.
-And the optional argument ``` --types ```, provide an environment of multiple types of badges and points ( If the option ``` --points ``` is being used too ).
-You can read more about how the badge, level and points implementation work at the [Documentation](http://joaomdmoura.github.com/gioco/)
+``` --points ``` argument will setup Gioco with a points system.
+``` --types ``` will setup an environment with multiple types of badges.
+If `--types` is used with `--points` then `types` will be able to represent types of points as well.
 
+You can read more about how the badge, level and points implementations work at the [Documentation](http://joaomdmoura.github.com/gioco/)
 
 Usage
 ------------
 
 ###Badge
-After setup gioco in you application, you'll be able to add and remove **Badges** as you want, using the following commands:
-
-PS. The boolean DEFAULT option is responsible to add a specific badge to all your **current** resources registrations.
+After you've setup Gioco in your application, you'll be able to add and remove **Badges** using the following commands:
+Note: The DEFAULT (boolean) option is responsible for adding a specific badge to all **current** resource registrations.
 
 ####Creating Badges
 
-To add Badges you will use rake tasks, the arguments will changing **according the setup arguments** that you used:
+To add Badges you will use rake tasks.
+Note: The arguments will change depending on which setup options you chose.
 
 Examples.
 
-With ```--points``` option:
+For setups with ```--points```:
 ```
 	rake gioco:add_badge[BADGE_NAME,POINTS_NUMBER,DEFAULT]
 ```
 
-With ```--types``` option:
+For setups with ```--types```:
 ```
 	rake gioco:add_badge[BADGE_NAME,TYPE_NAME,DEFAULT]
 ```
 
-With ```--points``` and ```--types``` option:
+For setups with ```--points``` and ```--types```:
 ```
 	rake gioco:add_badge[BADGE_NAME,POINTS_NUMBER,TYPE_NAME,DEFAULT]
 ```
 
-Without ```--points``` and ```--types``` option:
+For setups without ```--points``` or ```--types```:
 
 ```
 	rake gioco:add_badge[BADGE_NAME,DEFAULT]
 ```
 
 ####Destroying Badges
-
-And to remove Badges use:
 
 Example.
 
@@ -114,23 +114,24 @@ Without ```--types``` option:
 
 ####Destroying Types
 
-To remove Types use:
-
 Example.
 
 ```
   rake gioco:remove_type[TYPE_NAME]
 ```
 
-It's only possible when there it no badges related with this type, so, before you destroy a type you must detroy all badges that belong to it.
+Note: Before destroying a type, you must destroy all badges that relate to it.
 
 
 Methods
 ------------
 
-####Let's assume that you have setup gioco defining your **User** model as the **Resource**
+####Let's assume that you have setup Gioco defining your **User** model as the **Resource**
 
-After adding the badges as you wish, you will have to start to use it inside your application, and to do this, Gioco will provide and attach some methods that will allow you to easily apply any logic that you might have, without being concerned about small details.
+After adding the badges as you wish, you will have to start to use it inside your application, 
+and to do this, 
+Gioco will provide and attach some methods that will allow you to easily apply 
+any logic that you might have, without being concerned about small details.
 
 ###Resource Methods
 
