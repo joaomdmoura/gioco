@@ -13,10 +13,10 @@ Climate](https://codeclimate.com/github/joaomdmoura/gioco.png)](https://codeclim
 
 Description
 ------------
-Gioco is a easy-to-implement gamification gem based on plug and play concepts.
-With Gioco you are able to implement any standard gamification logic such as badges, levels and points / currencies.
-Dosen't matter if you already have a full and functional database, Gioco will smoothly integrate everything and provide all methods that you might need.
-For more information just keep reading.
+Gioco is an easy-to-implement gamification gem based on plug and play concepts.
+With Gioco you are able to implement gamification logic such as badges, levels and points / currencies.
+Whether you have an existing database or starting from scratch, Gioco will smoothly integrate everything and provide 
+all methods that you might need.
 
 ScreenCast
 ------------
