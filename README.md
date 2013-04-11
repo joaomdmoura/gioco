@@ -39,7 +39,7 @@ $ bundle install
 
 Setup
 ------------
-**To setup gioco with your application**
+**To setup Gioco with your application**
 
 Gioco has two optional setup parameters, ``` --points ``` and ``` --types ```.
 These can be used together, or separate.
@@ -129,18 +129,17 @@ Methods
 ####Let's assume that you have setup Gioco defining your **User** model as the **Resource**
 
 After adding the badges as you wish, you will have to start to use it inside your application, 
-and to do this, 
-Gioco will provide and attach some methods that will allow you to easily apply 
+and to do this, Gioco will provide and attach some methods that will allow you to easily apply 
 any logic that you might have, without being concerned about small details.
 
 ###Resource Methods
 
-Resource is the focus of your gamification logic and it should be defined in you setup process.
+Resource is the focus of your gamification logic and it should be defined in your setup process.
 
 ####Change Points
 
-Updating, adding or subtactring some amount of points of a resource. It will also remove or add the badges that was affected by the ponctuation change.
-**It will return the a hash with the info related of the badges added or removed.**
+Updating, adding or subtracting some amount of points of a resource. It will also remove or add the badges that was affected by the ponctuation change.
+**It will return a hash with the info related of the badges added or removed.**
 This method only is usefull when you setup the Gioco with the points system.
 
 **Ps. Type_id should be used only when you already used it as a setup argument**
@@ -150,7 +149,7 @@ user = User.find(1)
 user.change_points({ points: Points, type: Type_id }) #Add or Subtract some amount of points of a type
 ```
 
-If you have setup Giogo without ```--type``` then you shoul only pass the points argument instead of a hash:
+If you have setup Gioco without ```--type``` then you should only pass the points argument instead of a hash:
 
 ```ruby
 user = User.find(1)
@@ -180,7 +179,7 @@ user.badges #Return all user badges
 
 ####Add
 
-Add a Badge to a specific resource, **it will return the badge added, or if you are using points system it will return a hash with all badges that ahd been added**
+Add a Badge to a specific resource, **it will return the badge added, or if you are using points system it will return a hash with all badges that had been added**
 
 ```ruby
 badge = Badge.find(1)
@@ -189,7 +188,7 @@ badge.add(Resource_id) #Add a badge to a user
 
 ####Remove
 
-Remove a Badge of a specific resource, **it will return the badge removed, or if you are using points system it will return a hash with all badges that ahd been removed**
+Remove a Badge of a specific resource, **it will return the badge removed, or if you are using points system it will return a hash with all badges that had been removed**
 
 ```ruby
 badge = Badge.find(1)
@@ -209,9 +208,9 @@ Gioco::Ranking.generate #Return a object with the ranking of users
 
 Example
 ------------
-All basic usage flow to add gioco in an application:
+All basic usage flow to add Gioco in an application:
 
-####Let's assume that you have setup gioco defining your **User** model as the **Resource**
+####Let's assume that you have setup Gioco defining your **User** model as the **Resource**
 
 ```
 > rails g gioco:setup --points --types;
@@ -220,7 +219,7 @@ What is your resource model? (eg. user)
 > user
 ```
 
-Adding badges to the system using rake tasks, you badges have a pontuation and a type in this case cause I setup gioco using ```--points``` and ```--types``` arguments.
+Adding badges to the system using rake tasks, your badges have a pontuation and a type in this case cause I setup Gioco using ```--points``` and ```--types``` arguments.
 
 ```
 # Adding badges of a teacher type
@@ -234,7 +233,7 @@ Adding badges to the system using rake tasks, you badges have a pontuation and a
 > rake gioco:add_badge[speaker,100,commenter]
 ```
 
-Now the gioco is already installed and synced with the applciation and six badges are created.
+Now Gioco is already installed and synced with the applciation and six badges are created.
 
 The both defaults badge ( noob ) already was added to all users that we already have in our database.
 
@@ -247,7 +246,7 @@ user = User.find(1)
 user.change_points({ points: 100, type: type.id })
 ```
 
-Or if you wanna add or remove some badge **(consequently the gioco will add or remove the necessary points)**:
+Or if you wanna add or remove some badge **(consequently Gioco will add or remove the necessary points)**:
 
 ```ruby
 badge = Badge.where(:name => speaker)
@@ -257,7 +256,7 @@ badge.add(user.id)
 badge.remove(user.id)
 ```
 
-Get the iformation related to the next badge that the user want to earn:
+Get the information related to the next badge that the user want to earn:
 
 ```ruby
 type =  Type.where(:name => "teacher")
