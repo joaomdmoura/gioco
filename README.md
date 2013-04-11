@@ -234,7 +234,7 @@ Adding badges to the system using rake tasks, you badges have a pontuation and a
 > rake gioco:add_badge[speaker,100,commenter]
 ```
 
-Now the gioco is already installed and synced with the applciation and six badges are created.
+Now the gioco is already installed and synced with the application and six badges are created.
 
 The both defaults badge ( noob ) already was added to all users that we already have in our database.
 
