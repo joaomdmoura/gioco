@@ -15,7 +15,7 @@ Description
 ------------
 Gioco is an easy-to-implement gamification gem based on plug and play concepts.
 With Gioco you are able to implement gamification logic such as badges, levels and points / currencies.
-Whether you have an existing database or starting from scratch, Gioco will smoothly integrate everything and provide 
+Whether you have an existing database or starting from scratch, Gioco will smoothly integrate everything and provide
 all methods that you might need.
 
 ScreenCast
@@ -128,8 +128,8 @@ Methods
 
 ####Let's assume that you have setup Gioco defining your **User** model as the **Resource**
 
-After adding the badges as you wish, you will have to start to use it inside your application, 
-and to do this, Gioco will provide and attach some methods that will allow you to easily apply 
+After adding the badges as you wish, you will have to start to use it inside your application,
+and to do this, Gioco will provide and attach some methods that will allow you to easily apply
 any logic that you might have, without being concerned about small details.
 
 ###Resource Methods
