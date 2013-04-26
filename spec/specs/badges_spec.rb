@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Gioco do  
+describe Gioco do
   let(:user) { FactoryGirl.create(:user) }
   let(:type) { Type.find_by_name "comments" }
   let(:noob_badge) { Badge.find_by_name "noob" }
@@ -22,7 +22,7 @@ describe Gioco do
 
     context "Removing a badge to an user" do
 
-      before(:all) do
+      before(:each) do
         Point.destroy_all
         noob_badge.add(user.id)
         hard_badge.add(user.id)
