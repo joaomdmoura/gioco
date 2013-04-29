@@ -42,7 +42,7 @@ describe Gioco do
 
     context "Decressing points to an user loose meidum badge" do
 
-      before(:all) do
+      before(:each) do
         user.change_points(points: medium_badge.points, type: type.id)
       end
 
