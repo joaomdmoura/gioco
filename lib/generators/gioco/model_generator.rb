@@ -1,10 +1,10 @@
 module ModelGenerator
   def generate_models
     generate("model", "level badge_id:integer #{@model_name}_id:integer")
-    if options[:types]
-      generate("model", "point user_id:integer type_id:integer value:integer")
-      generate("model", "type name:string") 
-      generate("model", "badge name:string type_id:integer  #{(options[:points]) ? "points:integer" : ""} default:boolean")
+    if options[:kinds]
+      generate("model", "point user_id:integer kind_id:integer value:integer")
+      generate("model", "kind name:string")
+      generate("model", "badge name:string kind_id:integer  #{(options[:points]) ? "points:integer" : ""} default:boolean")
     else
       generate("migration", "add_points_to_#{@model_name.pluralize} points:integer") if options[:points]
       generate("model", "badge name:string #{(options[:points]) ? "points:integer" : ""} default:boolean")
@@ -13,7 +13,7 @@ module ModelGenerator
 
   def creating_templates
     @points = (options[:points] ) ? true : false
-    @types = (options[:types] ) ? true : false
+    @kinds = (options[:kinds] ) ? true : false
     template "gioco.rb", "config/initializers/gioco.rb"
   end
 
@@ -34,19 +34,19 @@ module ModelGenerator
     add_relationship("level", @model_name, "belongs_to")
     add_relationship("level", "badge", "belongs_to")
 
-    if options[:types]
+    if options[:kinds]
       add_relationship(@model_name, "points", "has_many")
-      add_relationship("type", "points", "has_many")
-      add_relationship("type", "badges", "has_many")
-      add_relationship("badge", "type", "belongs_to")
+      add_relationship("kind", "points", "has_many")
+      add_relationship("kind", "badges", "has_many")
+      add_relationship("badge", "kind", "belongs_to")
       add_relationship("point", @model_name, "belongs_to")
-      add_relationship("point", "type", "belongs_to")
+      add_relationship("point", "kind", "belongs_to")
     end
   end
 
   def add_validations
     add_validation("badge", "name", [["presence", "true"]])
-    add_validation("type", "name", [["uniqueness", "true"], ["presence", "true"]]) if options[:types]
+    add_validation("kind", "name", [["uniqueness", "true"], ["presence", "true"]]) if options[:kinds]
   end
 
   private

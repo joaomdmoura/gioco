@@ -13,8 +13,8 @@ class Gioco
     source_root File.expand_path("../../templates", __FILE__)
     
     desc "Setup Gioco for some resource"
-    class_option :points, :type => :boolean, :default => false, :desc => "Setup gioco with points-system based"
-    class_option :types, :type => :boolean, :default => false, :desc => "Setup gioco with multiples types(categories) of badges."
+    class_option :points, :kind => :boolean, :default => false, :desc => "Setup gioco with points-system based"
+    class_option :kinds, :kind => :boolean, :default => false, :desc => "Setup gioco with multiples kinds(categories) of badges."
 
 
     def execute

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Gioco do
   let(:user) { FactoryGirl.create(:user) }
-  let(:type) { Type.find_by_name "comments" }
+  let(:kind) { Kind.find_by_name "comments" }
   let(:noob_badge) { Badge.find_by_name "noob" }
   let(:medium_badge) { Badge.find_by_name "medium" }
   let(:hard_badge) { Badge.find_by_name "hard" }
@@ -15,7 +15,7 @@ describe Gioco do
         noob_badge.add(user.id)
         user.reload
         user.badges.should include noob_badge
-        user.points.where(:type_id => type.id).sum(:value) == noob_badge.points
+        user.points.where(:kind_id => kind.id).sum(:value) == noob_badge.points
       end
 
     end
@@ -32,7 +32,7 @@ describe Gioco do
         hard_badge.remove(user.id)
         user.reload
         user.badges.should_not include hard_badge
-        user.points.where(:type_id => type.id).sum(:value) == medium_badge.points
+        user.points.where(:kind_id => kind.id).sum(:value) == medium_badge.points
       end
 
     end

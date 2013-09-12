@@ -32,7 +32,7 @@ end
 
 task :setup do
   sh "cd #{test};RAILS_ENV=test rails g model user name:string email:string"
-  sh "cd #{test};echo user | RAILS_ENV=test rails g gioco:setup --points --types;"
+  sh "cd #{test};echo user | RAILS_ENV=test rails g gioco:setup --points --kinds;"
 end
 
 task :cleanning_project do
@@ -47,7 +47,7 @@ end
 task :trash_badges do
   sh "cd #{test};RAILS_ENV=test rake gioco:add_badge[noob,100,teacher]"
   sh "cd #{test};RAILS_ENV=test rake gioco:remove_badge[noob,teacher]"
-  sh "cd #{test};RAILS_ENV=test rake gioco:remove_type[teacher]"
+  sh "cd #{test};RAILS_ENV=test rake gioco:remove_kind[teacher]"
 end
 
 task :adding_badges do

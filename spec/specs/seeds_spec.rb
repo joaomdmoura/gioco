@@ -10,7 +10,7 @@ describe "Gioco: seeds support" do
     before(:all) do
       User.delete_all
       Badge.delete_all
-      Type.delete_all
+      Kind.delete_all
       Point.delete_all
     end
 
@@ -20,13 +20,13 @@ describe "Gioco: seeds support" do
         `cd #{Rails.root}/; rake db:seed`
       end
 
-      it "All Badges and Types should be created" do
+      it "All Badges and Kinds should be created" do
         Badge.all.size.should == 3
-        Type.all.size.should  == 1
+        Kind.all.size.should  == 1
       end
 
-      it "Type teacher should not exist" do
-        Type.find_by_name("teacher").should be_nil
+      it "Kind teacher should not exist" do
+        Kind.find_by_name("teacher").should be_nil
       end
     
     end

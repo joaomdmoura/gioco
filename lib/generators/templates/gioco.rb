@@ -1,3 +1,3 @@
 Gioco::Core::RESOURCE_NAME  = "<%= @model_name %>"
 Gioco::Core::POINTS         = <%= @points %>
-Gioco::Core::TYPES          = <%= @types %>
+Gioco::Core::KINDS          = <%= @kinds %>
