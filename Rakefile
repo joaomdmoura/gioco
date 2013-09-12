@@ -13,7 +13,6 @@ desc 'Generates a full dummy app for testing'
 task :dummy => [
                   :removing_app,
                   :generating_app,
-                  :support_files,
                   :setup,
                   :cleanning_project,
                   :trash_badges,
@@ -29,10 +28,6 @@ end
 
 task :generating_app do
   sh "rails new #{test} -q -f -G -S -J -T --skip-bundle --skip-gemfile"
-end
-
-task :support_files do
-  sh "cp #{config}/* #{test}/config"
 end
 
 task :setup do
