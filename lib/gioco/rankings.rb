@@ -3,7 +3,7 @@ class Gioco
 
     def self.ranking_with_type_and_points
       ranking = []
-      Type.find(:all).each do |t|
+      Type.all.each do |t|
         data = RESOURCE_NAME.capitalize.constantize
                 .select("#{RESOURCE_NAME.capitalize.constantize.table_name}.*, 
                          points.type_id, SUM(points.value) AS type_points")
@@ -26,7 +26,7 @@ class Gioco
                   .order("number_of_levels DESC")
     end
 
-    def self.generate      
+    def self.generate
       if POINTS && TYPES
         ranking = self.ranking_with_type_and_points
       elsif POINTS && !TYPES
