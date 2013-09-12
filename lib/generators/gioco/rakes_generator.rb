@@ -14,7 +14,7 @@ namespace :gioco do
     if !args.name #{"|| !args.points" if options[:points]}#{" || !args.type" if options[:types]}
       raise "There are missing some arguments"
     else
-      badge_string = "#{options[:types] ? 'type = Type.find_or_create_by_name(\'#{args.type}\')\n' : ''}"
+      badge_string = "#{options[:types] ? 'type = Type.find_or_create_by(name: \'#{args.type}\')\n' : ''}"
 
       badge_string = badge_string + "badge = Badge.create({ 
                       :name => \'\#\{args.name\}\', 
