@@ -48,8 +48,8 @@
 
 					<span class="subtitle">Concept</span>
 					<br />
-					Gioco implements the concepts of <span class="highlight">Badge, Points and Types</span> to cover the majority of gamifications implementations. <span class="highlight">Points</span> and <span class="highlight">Types</span> are optional but can be very useful.<br />
-					The basic logic is that a <span class="highlight">Resource</span> ( e.g. User ) has <span class="highlight">Points</span> of different <span class="highlight">Types</span> and when this Resource gets a certain amount of Points of a specific Type it can win or lose <span class="highlight">Levels</span>, connecting or disconnecting the Resource with a <span class="highlight">Badge</span> ( getting a badge through a level ).<br />
+					Gioco implements the concepts of <span class="highlight">Badge, Points and Kinds</span> to cover the majority of gamifications implementations. <span class="highlight">Points</span> and <span class="highlight">Kinds</span> are optional but can be very useful.<br />
+					The basic logic is that a <span class="highlight">Resource</span> ( e.g. User ) has <span class="highlight">Points</span> of different <span class="highlight">Kinds</span> and when this Resource gets a certain amount of Points of a specific Kind it can win or lose <span class="highlight">Levels</span>, connecting or disconnecting the Resource with a <span class="highlight">Badge</span> ( getting a badge through a level ).<br />
 					But <span class="highlight">Points</span> are optional so, if you don't want to register Points, all you have to do is to add and remove <span class="highlight">Badges</span> as required by your business rules ( through a level ).
 					<br /><br />
 
@@ -66,11 +66,11 @@
 					<br />
 
 					After installing Gioco you'll need to set it up. The <span class="highlight">MODEL_NAME</span> should be replaced for the model you want the resource of the gamification to be. (e.g. user )<br />
-					Gioco has two optional setup parameters, <span class="highlight">--points</span> and <span class="highlight">--types</span>, they can be used togheter or not.<br />
-					<div class="code">rails g gioco:setup --points --types</div>
+					Gioco has two optional setup parameters, <span class="highlight">--points</span> and <span class="highlight">--kinds</span>, they can be used togheter or not.<br />
+					<div class="code">rails g gioco:setup --points --kinds</div>
 					other example would be:<br />
 					<div class="code">rails g gioco:setup</div>
-					The optional <span class="highlight">--points</span> argument will setup Gioco with a points system explained at the <span class="highlight">Concept</span>. And the optional argument <span class="highlight">--types</span> provides an environment of multiple types of badges and points ( If the option --points is being used too ). 
+					The optional <span class="highlight">--points</span> argument will setup Gioco with a points system explained at the <span class="highlight">Concept</span>. And the optional argument <span class="highlight">--kinds</span> provides an environment of multiple kinds of badges and points ( If the option --points is being used too ).
 					<br /><br />
 
 					<span class="subtitle">Badges Management</span>
@@ -82,21 +82,21 @@
 					With --points option:<br />
 					<div class="code">rake gioco:add_badge[BADGE_NAME,POINTS_NUMBER,DEFAULT]</div>
 
-					With --types option:<br />
-					<div class="code">rake gioco:add_badge[BADGE_NAME,TYPE_NAME,DEFAULT]</div>
+					With --kinds option:<br />
+					<div class="code">rake gioco:add_badge[BADGE_NAME,KIND_NAME,DEFAULT]</div>
 
-					With --points and --types option:<br />
-					<div class="code">rake gioco:add_badge[BADGE_NAME,POINTS_NUMBER,TYPE_NAME,DEFAULT]</div>
+					With --points and --kinds option:<br />
+					<div class="code">rake gioco:add_badge[BADGE_NAME,POINTS_NUMBER,KIND_NAME,DEFAULT]</div>
 
-					Without --points and --types option:<br />
+					Without --points and --kinds option:<br />
     			<div class="code">rake gioco:add_badge[BADGE_NAME,DEFAULT]</div>
 
 					And to remove Badges, use:<br />
 
-					With --types option:<br />
-					<div class="code">rake gioco:remove_badge[BADGE_NAME,TYPE_NAME]</div>
+					With --kinds option:<br />
+					<div class="code">rake gioco:remove_badge[BADGE_NAME,KIND_NAME]</div>
 
-					Without --types option:<br />
+					Without --kinds option:<br />
 					<div class="code">rake gioco:remove_badge[BADGE_NAME]</div>
 
 					<br/><br />
@@ -109,20 +109,20 @@
 
 					<span class="highlight">Change Points</span>
 
-					This method is useful only when you setup the Gioco with the points system.<span class="highlight">Type_id</span> should be used only when you already used it as a setup argument<br /><br />
-					<div class="code">user = User.find(1)<br />user.change_points({ points: Points, type_id: Type_id })</div>
+					This method is useful only when you setup the Gioco with the points system.<span class="highlight">Kind_id</span> should be used only when you already used it as a setup argument<br /><br />
+					<div class="code">user = User.find(1)<br />user.change_points({ points: Points, kind_id: Kind_id })</div>
 
-					If you have setup Giogo without <span class="highlight">--type</span> then you shoul only pass the points argument instead of a hash:<br /><br />
+					If you have setup Giogo without <span class="highlight">--kind</span> then you should only pass the points argument instead of a hash:<br /><br />
 					<div class="code">user = User.find(1)<br />user.change_points(Points)</div>
 
 					<span class="highlight">Next Badge?</span>
 					
 					Return the next badge information, including percent and points info.
-					<span class="highlight">Type_id should be used only when you already used it as a setup argument</span>
+					<span class="highlight">Kind_id should be used only when you already used it as a setup argument</span>
 					<br /><br />
-					<div class="code">user = User.find(1)<br />user.next_badge?(Type_id)</div>
+					<div class="code">user = User.find(1)<br />user.next_badge?(Kind_id)</div>
 
-					If you have setup Giogo without <span class="highlight">--type</span> then you shouldn't pass any argument:<br /><br />
+					If you have setup Giogo without <span class="highlight">--kinds</span> then you shouldn't pass any argument:<br /><br />
 					<div class="code">user = User.find(1)<br />user.next_badge?()</div>
 
 					<span class="highlight">Get Badges and Points</span>
@@ -147,7 +147,7 @@
 
 					<span class="highlight">Generate</span>
 					<div class="code">Gioco::Ranking.generate</div>
-					This method returns an array with a ranking of all your resources ordered by points or quantity of badges, the result format will change according to the setup arguments you have used ( <span class="highlight">--points</span> and/or <span class="highlight">--types</span> )<br /><br />
+					This method returns an array with a ranking of all your resources ordered by points or quantity of badges, the result format will change according to the setup arguments you have used ( <span class="highlight">--points</span> and/or <span class="highlight">--kinds</span> )<br /><br />
 
 				</div>
 			</div>
