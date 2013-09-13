@@ -1,7 +1,7 @@
 ![Alt text](http://joaomdmoura.github.com/gioco/assets/images/new_logo.png "A gamification gem for Ruby on Rails applications")
 
-# Gioco (current version - 1.0.1)
-A **gamification** gem to Ruby on Rails applications
+# Gioco (current version - 1.1.1)
+A **gamification** gem to Ruby on Rails applications that use Active Record
 
 [![Build
 Status](https://travis-ci.org/joaomdmoura/gioco.png?branch=master)](https://travis-ci.org/joaomdmoura/gioco)
@@ -20,6 +20,7 @@ all methods that you might need.
 
 ScreenCast
 ------------
+(*warning* it have some deprecated details)
 A Gioco overview screencast is available at [Youtube](http://www.youtube.com/watch?v=Pt2sAA8JuEg):
 
 
@@ -41,14 +42,14 @@ Setup
 ------------
 **To setup Gioco with your application**
 
-Gioco has two optional setup parameters, ``` --points ``` and ``` --types ```.
-These can be used together, or separate.
+Gioco has two optional setup parameters, ``` --points ``` and ``` --kinds ```.
+These can be used together, or separately.
 
 Next, you will be prompted to provide your `Resource Model`.
 This is generally the `User` model.
 
 ```
-rails g gioco:setup --points --types;
+rails g gioco:setup --points --kinds;
 ```
 
 or
@@ -58,8 +59,8 @@ rails g gioco:setup;
 ```
 
 ``` --points ``` argument will setup Gioco with a points system.
-``` --types ``` will setup an environment with multiple types of badges.
-If `--types` is used with `--points` then `types` will be able to represent types of points as well.
+``` --kinds ``` will setup an environment with multiple kinds of badges.
+If `--kinds` is used with `--points` then `kinds` will be able to represent kinds of points as well.
 
 You can read more about how the badge, level and points implementations work at the [Documentation](http://joaomdmoura.github.com/gioco/)
 
@@ -82,17 +83,17 @@ For setups with ```--points```:
 	rake gioco:add_badge[BADGE_NAME,POINTS_NUMBER,DEFAULT]
 ```
 
-For setups with ```--types```:
+For setups with ```--kinds```:
 ```
-	rake gioco:add_badge[BADGE_NAME,TYPE_NAME,DEFAULT]
-```
-
-For setups with ```--points``` and ```--types```:
-```
-	rake gioco:add_badge[BADGE_NAME,POINTS_NUMBER,TYPE_NAME,DEFAULT]
+	rake gioco:add_badge[BADGE_NAME,KIND_NAME,DEFAULT]
 ```
 
-For setups without ```--points``` or ```--types```:
+For setups with ```--points``` and ```--kinds```:
+```
+	rake gioco:add_badge[BADGE_NAME,POINTS_NUMBER,KIND_NAME,DEFAULT]
+```
+
+For setups without ```--points``` or ```--kinds```:
 
 ```
 	rake gioco:add_badge[BADGE_NAME,DEFAULT]
@@ -102,25 +103,25 @@ For setups without ```--points``` or ```--types```:
 
 Example.
 
-With ```--types``` option:
+With ```--kinds``` option:
 ```
-	rake gioco:remove_badge[BADGE_NAME,TYPE_NAME]
+	rake gioco:remove_badge[BADGE_NAME,KIND_NAME]
 ```
 
-Without ```--types``` option:
+Without ```--kinds``` option:
 ```
 	rake gioco:remove_badge[BADGE_NAME]
 ```
 
-####Destroying Types
+####Destroying Kinds
 
 Example.
 
 ```
-  rake gioco:remove_type[TYPE_NAME]
+  rake gioco:remove_kind[KIND_NAME]
 ```
 
-Note: Before destroying a type, you must destroy all badges that relate to it.
+Note: Before destroying a kind, you must destroy all badges that relate to it.
 
 
 Methods
@@ -142,14 +143,14 @@ Updating, adding or subtracting some amount of points of a resource. It will als
 **It will return a hash with the info related of the badges added or removed.**
 This method only is usefull when you setup the Gioco with the points system.
 
-**Ps. Type_id should be used only when you already used it as a setup argument**
+**Ps. Kind_id should be used only when you already used it as a setup argument**
 
 ```ruby
 user = User.find(1)
-user.change_points({ points: Points, type: Type_id }) #Add or Subtract some amount of points of a type
+user.change_points({ points: Points, kind: Kind_id }) #Add or Subtract some amount of points of a kind
 ```
 
-If you have setup Gioco without ```--type``` then you should only pass the points argument instead of a hash:
+If you have setup Gioco without ```--kinds``` then you should only pass the points argument instead of a hash:
 
 ```ruby
 user = User.find(1)
@@ -159,11 +160,11 @@ user.change_points(Points) #Add or Subtract some amount of points
 ####Next Badge?
 
 Return the next badge information, including percent and points info.
-**Ps. Type_id should be used only when you already used it as a setup argument**
+**Ps. Kind_id should be used only when you already used it as a setup argument**
 
 ```ruby
 user = User.find(1)
-user.next_badge?(Type_id) #Returns the information related to the next badge the user should win
+user.next_badge?(Kind_id) #Returns the information related to the next badge the user should win
 ```
 
 ####Get Badges
@@ -199,7 +200,7 @@ badge.remove(Resource_id) #Remove a badge from a user
 
 ####Generate
 
-Gioco provide a method to list all Resources in a ranking inside of an array, the result format will change according the setup arguments you used ( ```--points``` or/and ```--types``` ):
+Gioco provide a method to list all Resources in a ranking inside of an array, the result format will change according the setup arguments you used ( ```--points``` or/and ```--kinds``` ):
 
 ```ruby
 Gioco::Ranking.generate #Return a object with the ranking of users
@@ -213,22 +214,22 @@ All basic usage flow to add Gioco in an application:
 ####Let's assume that you have setup Gioco defining your **User** model as the **Resource**
 
 ```
-> rails g gioco:setup --points --types;
+> rails g gioco:setup --points --kinds;
 ...
 What is your resource model? (eg. user)
 > user
 ```
 
-Adding badges to the system using rake tasks, your badges have a pontuation and a type in this case cause I setup Gioco using ```--points``` and ```--types``` arguments.
+Adding badges to the system using rake tasks, your badges have a pontuation and a kind in this case cause I setup Gioco using ```--points``` and ```--kinds``` arguments.
 
 ```
-# Adding badges of a teacher type
+# Adding badges of a teacher kind
 > rake gioco:add_badge[noob,0,teacher,true]
 > rake gioco:add_badge[medium,100,teacher]
 > rake gioco:add_badge[hard,200,teacher]
 > rake gioco:add_badge[pro,500,teacher]
 
-# Adding badges of a commenter type
+# Adding badges of a commenter kind
 > rake gioco:add_badge[mude,0,commenter,true]
 > rake gioco:add_badge[speaker,100,commenter]
 ```
@@ -240,10 +241,10 @@ The both defaults badge ( noob ) already was added to all users that we already 
 Inside your application if you want to give 100 points to some user, inside your function you have to use the following method:
 
 ```ruby
-type =  Type.where(:name => "teacher")
+kind =  Kind.where(:name => "teacher")
 user = User.find(1)
 
-user.change_points({ points: 100, type: type.id })
+user.change_points({ points: 100, kind: kind.id })
 ```
 
 Or if you wanna add or remove some badge **(consequently Gioco will add or remove the necessary points)**:
@@ -259,10 +260,10 @@ badge.remove(user.id)
 Get the information related to the next badge that the user want to earn:
 
 ```ruby
-type =  Type.where(:name => "teacher")
+kind =  Kind.where(:name => "teacher")
 user = User.find(1)
 
-user.next_badge?(type.id)
+user.next_badge?(kind.id)
 ```
 
 To get a ranking of all resources all you need is call:
