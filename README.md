@@ -83,7 +83,6 @@ For setups with `--kinds`:
 
   rake gioco:add_badge[BADGE_NAME,KIND_NAME,DEFAULT]
 
-
 For setups with `--points` and `--kinds`:
 
   rake gioco:add_badge[BADGE_NAME,POINTS_NUMBER,KIND_NAME,DEFAULT]
@@ -126,11 +125,7 @@ Resource is the focus of your gamification logic and it should be defined in you
 
 #### Change Points
 
-Updating, adding or subtracting some amount of points of a resource. It will also remove or add the badges that was affected by the ponctuation change.
-
-**It will return a hash with the info related of the badges added or removed.**
-
-This method only is usefull when you setup the **Gioco** with the points system.
+Updating, adding or subtracting some amount of points of a resource. It will also remove or add the badges that was affected by the ponctuation change. **It will return a hash with the info related of the badges added or removed.** This method only is usefull when you setup the **Gioco** with the points system.
 
 **Note:** `kind_id` should be used only when you already used it as a setup argument.
 
