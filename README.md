@@ -168,7 +168,7 @@ Add a Badge to a specific resource, **it will return the badge added, or if you 
 
 ```ruby
 badge = Badge.find(1)
-badge.add(Resource_id) # Adds a badge to a user
+badge.add(resource_id) # Adds a badge to a user
 ```
 
 #### Remove
@@ -177,7 +177,7 @@ Remove a Badge of a specific resource, **it will return the badge removed, or if
 
 ```ruby
 badge = Badge.find(1)
-badge.remove(Resource_id) # Removes a badge from a user
+badge.remove(resource_id) # Removes a badge from a user
 ```
 
 ### Ranking Methods
