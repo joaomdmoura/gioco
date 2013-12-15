@@ -144,11 +144,11 @@ user.change_points(points) # Adds or Subtracts some amount of points
 #### Next Badge?
 
 Return the next badge information, including percent and points info.
-**Ps. Kind_id should be used only when you already used it as a setup argument**
+**Note:** `kind_id` should be used only when you already used it as a setup argument.
 
 ```ruby
 user = User.find(1)
-user.next_badge?(Kind_id) # Returns the information related to the next badge the user should earn
+user.next_badge?(kind_id) # Returns the information related to the next badge the user should earn
 ```
 
 #### Get Badges
