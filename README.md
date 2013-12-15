@@ -144,6 +144,7 @@ user.change_points(points) # Adds or Subtracts some amount of points
 #### Next Badge?
 
 Return the next badge information, including percent and points info.
+
 **Note:** `kind_id` should be used only when you already used it as a setup argument.
 
 ```ruby
@@ -173,7 +174,7 @@ badge.add(resource_id) # Adds a badge to a user
 
 #### Remove
 
-Remove a Badge of a specific resource, **it will return the badge removed, or if you are using points system it will return a hash with all badges that had been removed**
+Remove a Badge of a specific resource, **it will return the badge removed, or if you are using points system it will return a hash with all badges that had been removed**:
 
 ```ruby
 badge = Badge.find(1)
