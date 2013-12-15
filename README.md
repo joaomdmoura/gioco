@@ -131,14 +131,14 @@ Updating, adding or subtracting some amount of points of a resource. It will als
 
 ```ruby
 user = User.find(1)
-user.change_points({ points: Points, kind: Kind_id }) # Adds or Subtracts some amount of points of a kind
+user.change_points({ points: points, kind: kind_id }) # Adds or Subtracts some amount of points of a kind
 ```
 
 If you have setup **Gioco** without `--kinds` then you should only pass the points argument instead of a hash:
 
 ```ruby
 user = User.find(1)
-user.change_points(Points) # Adds or Subtracts some amount of points
+user.change_points(points) # Adds or Subtracts some amount of points
 ```
 
 #### Next Badge?
@@ -157,7 +157,7 @@ In order to get the badges or levels of you resource, all you have to do is:
 
 ```ruby
 user = User.find(1)
-user.badges #Return all user badges
+user.badges # Returns all user badges
 ```
 
 ### Badges Methods
