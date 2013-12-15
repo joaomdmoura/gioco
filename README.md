@@ -24,7 +24,6 @@ all methods that you might need.
 
 A **Gioco** overview screencast is available at [Youtube](http://www.youtube.com/watch?v=Pt2sAA8JuEg).
 
-
 ## Installation
 
 **Gioco** is available through [Rubygems](http://rubygems.org/gems/gioco) and can be installed by:
@@ -37,7 +36,7 @@ gem 'gioco'
 
 and running the bundler:
 
-`$ bundle install`
+    $ bundle install
 
 ## Setup
 
