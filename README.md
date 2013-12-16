@@ -1,7 +1,7 @@
 ![Alt text](http://joaomdmoura.github.io/gioco/assets/images/logo.png "A gamification gem for Ruby on Rails applications")
 
 # Gioco (current version - 1.1.1)
-A **gamification** gem to Ruby on Rails applications that use Active Record
+A **gamification** gem to Ruby on Rails applications that use Active Record.
 
 [![Build
 Status](https://travis-ci.org/joaomdmoura/gioco.png?branch=master)](https://travis-ci.org/joaomdmoura/gioco)
@@ -11,232 +11,214 @@ Status](https://gemnasium.com/joaomdmoura/gioco.png)](https://gemnasium.com/joao
 [![Code
 Climate](https://codeclimate.com/github/joaomdmoura/gioco.png)](https://codeclimate.com/github/joaomdmoura/gioco)
 
-Description
-------------
-Gioco is an easy-to-implement gamification gem based on plug and play concepts.
-With Gioco you are able to implement gamification logic such as badges, levels and points / currencies.
-Whether you have an existing database or starting from scratch, Gioco will smoothly integrate everything and provide
+## Description
+
+**Gioco** is an easy-to-implement gamification gem based on plug and play concepts.
+With **Gioco** you are able to implement gamification logic such as badges, levels and points / currencies.
+Whether you have an existing database or starting from scratch, **Gioco** will smoothly integrate everything and provide
 all methods that you might need.
 
-ScreenCast
-------------
-(*warning* it have some deprecated details)
-A Gioco overview screencast is available at [Youtube](http://www.youtube.com/watch?v=Pt2sAA8JuEg):
+## ScreenCast
 
+**Warning:** _it have some deprecated details._
 
-Installation
-------------
-Gioco is available through [Rubygems](http://rubygems.org/gems/gioco) and can be installed by:
+A **Gioco** overview screencast is available at [Youtube](http://www.youtube.com/watch?v=Pt2sAA8JuEg).
 
-adding it in Gemfile
+## Installation
+
+**Gioco** is available through [Rubygems](http://rubygems.org/gems/gioco) and can be installed by:
+
+adding it in Gemfile:
+
 ```ruby
 gem 'gioco'
 ```
-and running the bundler
-```
-$ bundle install
-```
 
+and running the bundler:
 
-Setup
-------------
-**To setup Gioco with your application**
+    $ bundle install
 
-Gioco has two optional setup parameters, ``` --points ``` and ``` --kinds ```.
-These can be used together, or separately.
+## Setup
 
-Next, you will be prompted to provide your `Resource Model`.
-This is generally the `User` model.
+**To setup Gioco with your application:**
 
-```
-rails g gioco:setup --points --kinds;
-```
+    rails g gioco:setup
 
-or
+Next, you will be prompted to provide your **Resource Model**. This is generally the **User** model.
 
-```
-rails g gioco:setup;
-```
+### Parameters:
 
-``` --points ``` argument will setup Gioco with a points system.
-``` --kinds ``` will setup an environment with multiple kinds of badges.
+**Gioco** has two optional setup parameters, `--points` and `--kinds`. These can be used together, or separately:
+
+    rails g gioco:setup --points --kinds
+
+`--points` argument will setup **Gioco** with a points system;
+
+`--kinds` will setup an environment with multiple kinds of badges.
+
 If `--kinds` is used with `--points` then `kinds` will be able to represent kinds of points as well.
 
-You can read more about how the badge, level and points implementations work at the [Documentation](http://joaomdmoura.github.com/gioco/)
+You can read more about how the badge, level and points implementations work at the [Documentation](http://joaomdmoura.github.com/gioco/).
 
-Usage
-------------
+## Usage
 
-###Badge
-After you've setup Gioco in your application, you'll be able to add and remove **Badges** using the following commands:
-Note: The DEFAULT (boolean) option is responsible for adding a specific badge to all **current** resource registrations.
+### Badge
 
-####Creating Badges
+After you've setup **Gioco** in your application, you'll be able to add and remove **Badges** using the following commands:
+
+**Note:** The DEFAULT (boolean) option is responsible for adding a specific badge to all **current** resource registrations.
+
+#### Creating Badges
 
 To add Badges you will use rake tasks.
 Note: The arguments will change depending on which setup options you chose.
 
-Examples.
+Examples:
 
-For setups with ```--points```:
-```
-	rake gioco:add_badge[BADGE_NAME,POINTS_NUMBER,DEFAULT]
-```
+For setups with `--points`:
 
-For setups with ```--kinds```:
-```
-	rake gioco:add_badge[BADGE_NAME,KIND_NAME,DEFAULT]
-```
+  rake gioco:add_badge[BADGE_NAME,POINTS_NUMBER,DEFAULT]
 
-For setups with ```--points``` and ```--kinds```:
-```
-	rake gioco:add_badge[BADGE_NAME,POINTS_NUMBER,KIND_NAME,DEFAULT]
-```
+For setups with `--kinds`:
 
-For setups without ```--points``` or ```--kinds```:
+  rake gioco:add_badge[BADGE_NAME,KIND_NAME,DEFAULT]
 
-```
-	rake gioco:add_badge[BADGE_NAME,DEFAULT]
-```
+For setups with `--points` and `--kinds`:
 
-####Destroying Badges
+  rake gioco:add_badge[BADGE_NAME,POINTS_NUMBER,KIND_NAME,DEFAULT]
 
-Example.
+For setups without `--points` or `--kinds`:
 
-With ```--kinds``` option:
-```
-	rake gioco:remove_badge[BADGE_NAME,KIND_NAME]
-```
+  rake gioco:add_badge[BADGE_NAME,DEFAULT]
 
-Without ```--kinds``` option:
-```
-	rake gioco:remove_badge[BADGE_NAME]
-```
+#### Destroying Badges
 
-####Destroying Kinds
+Example:
 
-Example.
+With `--kinds` option:
 
-```
-  rake gioco:remove_kind[KIND_NAME]
-```
+  rake gioco:remove_badge[BADGE_NAME,KIND_NAME]
 
-Note: Before destroying a kind, you must destroy all badges that relate to it.
+Without `--kinds` option:
 
+  rake gioco:remove_badge[BADGE_NAME]
 
-Methods
-------------
+#### Destroying Kinds
 
-####Let's assume that you have setup Gioco defining your **User** model as the **Resource**
+Example:
+
+    rake gioco:remove_kind[KIND_NAME]
+
+**Note:** Before destroying a kind, you must destroy all badges that relate to it.
+
+## Methods
+
+#### Let's assume that you have setup Gioco defining your **User** model as the **Resource**
 
 After adding the badges as you wish, you will have to start to use it inside your application,
-and to do this, Gioco will provide and attach some methods that will allow you to easily apply
+and to do this, **Gioco** will provide and attach some methods that will allow you to easily apply
 any logic that you might have, without being concerned about small details.
 
-###Resource Methods
+### Resource Methods
 
 Resource is the focus of your gamification logic and it should be defined in your setup process.
 
-####Change Points
+#### Change Points
 
-Updating, adding or subtracting some amount of points of a resource. It will also remove or add the badges that was affected by the ponctuation change.
-**It will return a hash with the info related of the badges added or removed.**
-This method only is usefull when you setup the Gioco with the points system.
+Updating, adding or subtracting some amount of points of a resource. It will also remove or add the badges that was affected by the ponctuation change. **It will return a hash with the info related of the badges added or removed.** This method only is usefull when you setup the **Gioco** with the points system.
 
-**Ps. Kind_id should be used only when you already used it as a setup argument**
+**Note:** `kind_id` should be used only when you already used it as a setup argument.
 
 ```ruby
 user = User.find(1)
-user.change_points({ points: Points, kind: Kind_id }) #Add or Subtract some amount of points of a kind
+user.change_points({ points: points, kind: kind_id }) # Adds or Subtracts some amount of points of a kind
 ```
 
-If you have setup Gioco without ```--kinds``` then you should only pass the points argument instead of a hash:
+If you have setup **Gioco** without `--kinds` then you should only pass the points argument instead of a hash:
 
 ```ruby
 user = User.find(1)
-user.change_points(Points) #Add or Subtract some amount of points
+user.change_points(points) # Adds or Subtracts some amount of points
 ```
 
-####Next Badge?
+#### Next Badge?
 
 Return the next badge information, including percent and points info.
-**Ps. Kind_id should be used only when you already used it as a setup argument**
+
+**Note:** `kind_id` should be used only when you already used it as a setup argument.
 
 ```ruby
 user = User.find(1)
-user.next_badge?(Kind_id) #Returns the information related to the next badge the user should win
+user.next_badge?(kind_id) # Returns the information related to the next badge the user should earn
 ```
 
-####Get Badges
+#### Get Badges
 
-To get the badges or levels of you resource all you have to do is:
+In order to get the badges or levels of you resource, all you have to do is:
 
 ```ruby
 user = User.find(1)
-user.badges #Return all user badges
+user.badges # Returns all user badges
 ```
 
-###Badges Methods
+### Badges Methods
 
-####Add
+#### Add
 
-Add a Badge to a specific resource, **it will return the badge added, or if you are using points system it will return a hash with all badges that had been added**
+Add a Badge to a specific resource, **it will return the badge added, or if you are using points system it will return a hash with all badges that had been added**:
 
 ```ruby
 badge = Badge.find(1)
-badge.add(Resource_id) #Add a badge to a user
+badge.add(resource_id) # Adds a badge to a user
 ```
 
-####Remove
+#### Remove
 
-Remove a Badge of a specific resource, **it will return the badge removed, or if you are using points system it will return a hash with all badges that had been removed**
+Remove a Badge of a specific resource, **it will return the badge removed, or if you are using points system it will return a hash with all badges that had been removed**:
 
 ```ruby
 badge = Badge.find(1)
-badge.remove(Resource_id) #Remove a badge from a user
+badge.remove(resource_id) # Removes a badge from a user
 ```
 
-###Ranking Methods
+### Ranking Methods
 
-####Generate
+#### Generate
 
-Gioco provide a method to list all Resources in a ranking inside of an array, the result format will change according the setup arguments you used ( ```--points``` or/and ```--kinds``` ):
+**Gioco** provides a method to list all Resources in a ranking inside of an array, the result format will change according the setup arguments you used (`--points` or/and `--kinds`):
 
 ```ruby
-Gioco::Ranking.generate #Return a object with the ranking of users
+Gioco::Ranking.generate # Returns a object with the ranking of users
 ```
 
+## Example
 
-Example
-------------
-All basic usage flow to add Gioco in an application:
+All basic usage flow to add **Gioco** in an application:
 
-####Let's assume that you have setup Gioco defining your **User** model as the **Resource**
+#### Let's assume that you have setup Gioco defining your _User_ model as the _Resource_:
 
 ```
-> rails g gioco:setup --points --kinds;
+$ rails g gioco:setup --points --kinds;
 ...
 What is your resource model? (eg. user)
 > user
 ```
 
-Adding badges to the system using rake tasks, your badges have a pontuation and a kind in this case cause I setup Gioco using ```--points``` and ```--kinds``` arguments.
+Adding badges to the system using rake tasks, your badges have a pontuation and a kind in this case cause I setup **Gioco** using `--points` and `--kinds` arguments.
 
-```
-# Adding badges of a teacher kind
-> rake gioco:add_badge[noob,0,teacher,true]
-> rake gioco:add_badge[medium,100,teacher]
-> rake gioco:add_badge[hard,200,teacher]
-> rake gioco:add_badge[pro,500,teacher]
+    # Adding badges of a teacher kind
+    $ rake gioco:add_badge[noob,0,teacher,true]
+    $ rake gioco:add_badge[medium,100,teacher]
+    $ rake gioco:add_badge[hard,200,teacher]
+    $ rake gioco:add_badge[pro,500,teacher]
 
-# Adding badges of a commenter kind
-> rake gioco:add_badge[mude,0,commenter,true]
-> rake gioco:add_badge[speaker,100,commenter]
-```
+    # Adding badges of a commenter kind
+    $ rake gioco:add_badge[mude,0,commenter,true]
+    $ rake gioco:add_badge[speaker,100,commenter]
 
-Now Gioco is already installed and synced with the applciation and six badges are created.
+Now **Gioco** is already installed and synced with the applciation and six badges are created.
 
-The both defaults badge ( noob ) already was added to all users that we already have in our database.
+The both defaults badge (noob) already was added to all users that we already have in our database.
 
 Inside your application if you want to give 100 points to some user, inside your function you have to use the following method:
 
@@ -266,18 +248,17 @@ user = User.find(1)
 user.next_badge?(kind.id)
 ```
 
-To get a ranking of all resources all you need is call:
+In order to get a ranking of all resources, all you need is call:
 
 ```ruby
 Gioco::Ranking.generate
 ```
 
-License
-------------
-Gioco is released under the MIT license:
-www.opensource.org/licenses/MIT
+## License
 
-This is it!
-------------
+**Gioco** is released under the [MIT license](www.opensource.org/licenses/MIT).
+
+## This is it!
+
 Well, this is **Gioco** I really hope you enjoy and use it a lot, I'm still working on it so dont be shy, let me know
 if something get wrong opening a issue, then I can fix it and we help each other ;)
