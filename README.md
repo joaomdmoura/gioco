@@ -77,19 +77,19 @@ Examples:
 
 For setups with `--points`:
 
-  rake gioco:add_badge[BADGE_NAME,POINTS_NUMBER,DEFAULT]
+    rake gioco:add_badge[BADGE_NAME,POINTS_NUMBER,DEFAULT]
 
 For setups with `--kinds`:
 
-  rake gioco:add_badge[BADGE_NAME,KIND_NAME,DEFAULT]
+    rake gioco:add_badge[BADGE_NAME,KIND_NAME,DEFAULT]
 
 For setups with `--points` and `--kinds`:
 
-  rake gioco:add_badge[BADGE_NAME,POINTS_NUMBER,KIND_NAME,DEFAULT]
+    rake gioco:add_badge[BADGE_NAME,POINTS_NUMBER,KIND_NAME,DEFAULT]
 
 For setups without `--points` or `--kinds`:
 
-  rake gioco:add_badge[BADGE_NAME,DEFAULT]
+    rake gioco:add_badge[BADGE_NAME,DEFAULT]
 
 #### Destroying Badges
 
@@ -97,7 +97,7 @@ Example:
 
 With `--kinds` option:
 
-  rake gioco:remove_badge[BADGE_NAME,KIND_NAME]
+    rake gioco:remove_badge[BADGE_NAME,KIND_NAME]
 
 Without `--kinds` option:
 
