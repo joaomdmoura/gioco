@@ -101,7 +101,7 @@ With `--kinds` option:
 
 Without `--kinds` option:
 
-  rake gioco:remove_badge[BADGE_NAME]
+    rake gioco:remove_badge[BADGE_NAME]
 
 #### Destroying Kinds
 
