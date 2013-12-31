@@ -54,5 +54,6 @@ task :adding_badges do
   sh "cd #{test};RAILS_ENV=test rake gioco:add_badge[noob,100,comments]"
   sh "cd #{test};RAILS_ENV=test rake gioco:add_badge[medium,500,comments]"
   sh "cd #{test};RAILS_ENV=test rake gioco:add_badge[hard,1000,comments]"
+  sh "cd #{test};RAILS_ENV=test rake gioco:update_database"
 end
 

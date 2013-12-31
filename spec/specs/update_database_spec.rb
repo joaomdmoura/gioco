@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe "Gioco: seeds support" do
+describe "Gioco: database update support" do
   let(:user_a) { FactoryGirl.create(:user) }
   let(:user_b) { FactoryGirl.create(:user) }
   let(:user_c) { FactoryGirl.create(:user) }
 
-  context "Running seeds to simulating production environment" do
+  context "Running database update rake task to simulate production environment" do
 
     before(:all) do
       User.delete_all
@@ -14,10 +14,10 @@ describe "Gioco: seeds support" do
       Point.delete_all
     end
 
-    context "Using rake db:seed to recreate all badges registers and relations" do
+    context "Using rake gioco:update_database to recreate all badges and relations" do
     
       before :all do
-        `cd #{Rails.root}/; rake db:seed`
+        `cd #{Rails.root}/; rake gioco:update_database`
       end
 
       it "All Badges and Kinds should be created" do
