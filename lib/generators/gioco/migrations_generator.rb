@@ -10,9 +10,8 @@ module MigrationsGenerator
     rake("db:migrate")
   end
 
-  def configuring_seed
+  def configuring_database
     empty_directory "db/gioco"
     create_file "db/gioco/db.rb"
-    append_file 'db/seeds.rb', 'require "#{Rails.root}/db/gioco/db.rb"'
   end
 end
