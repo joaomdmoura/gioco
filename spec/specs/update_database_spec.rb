@@ -21,7 +21,7 @@ describe "Gioco: database update support" do
       end
 
       it "All Badges and Kinds should be created" do
-        Badge.all.size.should == 3
+        Badge.all.size.should == 4
         Kind.all.size.should  == 1
       end
 
