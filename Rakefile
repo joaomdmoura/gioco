@@ -6,7 +6,7 @@ desc "Run specs"
 task :default => :spec
 
 RSpec::Core::RakeTask.new(:spec) do |t|
-  t.pattern = ['./spec/**/*_spec.rb', './spec/**/*_fac.rb']
+  t.pattern = ['./spec/factories/*.rb', './spec/specs/*.rb', './spec/shared_contexts/*.rb']
 end
 
 desc 'Generates a full dummy app for testing'
