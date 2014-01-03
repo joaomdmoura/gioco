@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe "Gioco: database update support" do
+describe "Gioco: database sync support" do
   let(:user_a) { FactoryGirl.create(:user) }
   let(:user_b) { FactoryGirl.create(:user) }
   let(:user_c) { FactoryGirl.create(:user) }
 
-  context "Running database update rake task to simulate production environment" do
+  context "Running database sync rake task to simulate production environment" do
 
     before(:all) do
       User.delete_all
@@ -14,7 +14,7 @@ describe "Gioco: database update support" do
       Point.delete_all
     end
 
-    context "Using rake gioco:update_database to recreate all badges and relations" do
+    context "Using rake gioco:sync_database to recreate all badges and relations" do
     
       before :all do
         `cd #{Rails.root}/; rake gioco:sync_database`
