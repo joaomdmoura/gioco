@@ -16,12 +16,17 @@ namespace :gioco do
     else
       badge_string = "#{options[:kinds] ? 'kind = Kind.find_or_create_by(name: \'#{args.kind}\')\n' : ''}"
 
-      badge_string = badge_string + "badge = Badge.create({
-                      :name => \'\#\{args.name\}\',
-                      #{":points => \'\#\{args.points\}\'," if options[:points]}
-                      #{":kind_id  => kind.id," if options[:kinds]}
-                      :default => \'\#\{arg_default\}\'
-                    })\n"
+      badge_string = badge_string + "badge = Badge.where 'name = ? AND kind_id = ?', '#\{args.name\}', #{"kind.id" if options[:kinds]}\n
+                    if badge.empty?
+                      badge = Badge.create({
+                        name: \'\#\{args.name\}\',
+                        #{"points: \'\#\{args.points\}\'," if options[:points]}
+                        #{"kind_id: kind.id," if options[:kinds]}
+                        default: \'\#\{arg_default\}\'
+                      })
+                    else
+                      raise 'There is another badge with this name related with this kind'
+                    end\n"
 
       if arg_default
         badge_string = badge_string + 'resources = #{@model_name.capitalize}.find(:all)\n'
