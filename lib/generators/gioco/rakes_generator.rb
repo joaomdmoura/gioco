@@ -99,7 +99,7 @@ if options[:kinds]
   '
 end
 }
-  task :update_database => :environment do
+  task :sync_database => :environment do
     content = File.read("#{Rails.root}/db/gioco/db.rb")
     eval content
   end

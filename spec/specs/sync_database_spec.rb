@@ -17,7 +17,7 @@ describe "Gioco: database update support" do
     context "Using rake gioco:update_database to recreate all badges and relations" do
     
       before :all do
-        `cd #{Rails.root}/; rake gioco:update_database`
+        `cd #{Rails.root}/; rake gioco:sync_database`
       end
 
       it "All Badges and Kinds should be created" do
