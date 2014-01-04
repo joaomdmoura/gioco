@@ -1,12 +1,12 @@
 module RakesGenerator
   def create_rakes
-  rakefile("gioco.rake") do
+  rakefile 'gioco.rake' do
         <<-EOS
 # -*- encoding: utf-8 -*-
 namespace :gioco do
-  
+
   desc "Used to add a new badge at Gioco scheme"
-  
+
   task :add_badge, [:name, #{":points, " if options[:points]}#{":kind, " if options[:kinds]}:default] => :environment do |t, args|
     arg_default = ( args.default ) ? eval(args.default) : false
 
@@ -16,12 +16,17 @@ namespace :gioco do
     else
       badge_string = "#{options[:kinds] ? 'kind = Kind.find_or_create_by(name: \'#{args.kind}\')\n' : ''}"
 
-      badge_string = badge_string + "badge = Badge.create({ 
-                      :name => \'\#\{args.name\}\', 
-                      #{":points => \'\#\{args.points\}\'," if options[:points]}
-                      #{":kind_id  => kind.id," if options[:kinds]}
-                      :default => \'\#\{arg_default\}\'
-                    })\n"
+      badge_string = badge_string + "badge = Badge.where 'name = ? AND kind_id = ?', '#\{args.name\}', #{"kind.id" if options[:kinds]}\n
+                    if badge.empty?
+                      badge = Badge.create({
+                        name: \'\#\{args.name\}\',
+                        #{"points: \'\#\{args.points\}\'," if options[:points]}
+                        #{"kind_id: kind.id," if options[:kinds]}
+                        default: \'\#\{arg_default\}\'
+                      })
+                    else
+                      raise 'There is another badge with this name related with this kind'
+                    end\n"
 
       if arg_default
         badge_string = badge_string + 'resources = #{@model_name.capitalize}.find(:all)\n'
@@ -37,11 +42,11 @@ namespace :gioco do
           r.save!
         end\n"
       end
-      
+
       badge_string = badge_string + "puts '> Badge successfully created'"
 
       eval badge_string
-      
+
       file_path = "/db/gioco/create_badge_\#\{args.name\}#{"_\#\{args.kind\}" if options[:kinds]}.rb"
       File.open("\#\{Rails.root\}\#\{file_path\}", 'w') { |f| f.write badge_string }
       File.open("\#\{Rails.root\}/db/gioco/db.rb", 'a') { |f| f.write "require \\"\\#\\{Rails.root\\}\#\{file_path\}\\"\n" }
@@ -64,7 +69,7 @@ namespace :gioco do
     badge_string = badge_string + "puts '> Badge successfully removed'"
 
     eval badge_string
-    
+
     file_path = "/db/gioco/remove_badge_\#\{args.name\}.rb"
     File.open("\#\{Rails.root\}\#\{file_path\}", 'w') { |f| f.write badge_string }
     File.open("\#\{Rails.root\}/db/gioco/db.rb", 'a') { |f| f.write "require \\"\\#\\{Rails.root\\}\#\{file_path\}\\"\n" }
@@ -86,16 +91,20 @@ if options[:kinds]
     end
     kind_string = kind_string + "puts \'> Kind successfully removed\'"
     eval kind_string
-    
+
     file_path = "/db/gioco/remove_kind_#{args.name}.rb"
     File.open("#{Rails.root}#{file_path}", "w") { |f| f.write kind_string }
     File.open("#{Rails.root}/db/gioco/db.rb", "a") { |f| f.write "require \\"\\#\\{Rails.root\\}#{file_path}\\"\n" }
   end
   '
 end
-}  
+}
+  task :sync_database => :environment do
+    content = File.read("#{Rails.root}/db/gioco/db.rb")
+    eval content
+  end
 end
         EOS
-      end     
+      end
   end
 end

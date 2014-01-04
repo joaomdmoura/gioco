@@ -25,7 +25,7 @@ class Gioco
       add_validations
       setup_relations
       create_rakes
-      configuring_seed
+      configuring_database
       migrating
       instructions
     end
