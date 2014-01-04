@@ -254,6 +254,16 @@ In order to get a ranking of all resources, all you need is call:
 Gioco::Ranking.generate
 ```
 
+## Deploy
+
+Once that you decide that you are ready to deploy / update your application, if you added or removed any **kind** or
+**badge**, you need to run the ```sync_database``` rake task, that will do the job of recreate your actions in production,
+or any environments.
+
+```
+$ rake gioco:sync_database
+```
+
 ## License
 
 **Gioco** is released under the [MIT license](www.opensource.org/licenses/MIT).
