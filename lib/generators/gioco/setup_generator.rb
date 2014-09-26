@@ -16,7 +16,6 @@ class Gioco
     class_option :points, :kind => :boolean, :default => false, :desc => "Setup gioco with points-system based"
     class_option :kinds, :kind => :boolean, :default => false, :desc => "Setup gioco with multiples kinds(categories) of badges."
 
-
     def execute
       @model_name = ask("What is your resource model?", :default => 'user')
       generate_models
