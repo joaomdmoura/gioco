@@ -11,14 +11,13 @@ class Gioco
     include GeneratorInstructions
 
     source_root File.expand_path("../../templates", __FILE__)
-    
+
     desc "Setup Gioco for some resource"
     class_option :points, :kind => :boolean, :default => false, :desc => "Setup gioco with points-system based"
     class_option :kinds, :kind => :boolean, :default => false, :desc => "Setup gioco with multiples kinds(categories) of badges."
 
-
     def execute
-      @model_name = ask("What is your resource model? (eg. user)")
+      @model_name = ask("What is your resource model?", :default => 'user')
       generate_models
       creating_templates
       adding_methods
@@ -29,6 +28,6 @@ class Gioco
       migrating
       instructions
     end
-  
+
   end
 end
