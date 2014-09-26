@@ -3,8 +3,6 @@
 # Gioco (current version - 1.1.1)
 A **gamification** gem to Ruby on Rails applications that use Active Record.
 
-[![Build
-Status](https://travis-ci.org/giocoapp/gioco.png?branch=master)](https://travis-ci.org/giocoapp/gioco)
 [![Dependency
 Status](https://gemnasium.com/joaomdmoura/gioco.png)](https://gemnasium.com/joaomdmoura/gioco)
 [![Coverage Status](https://coveralls.io/repos/joaomdmoura/gioco/badge.png?branch=master)](https://coveralls.io/r/joaomdmoura/gioco)
