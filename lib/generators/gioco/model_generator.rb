@@ -2,7 +2,7 @@ module ModelGenerator
   def generate_models
     generate("model", "level badge_id:integer #{@model_name}_id:integer")
     if options[:kinds]
-      generate("model", "point user_id:integer kind_id:integer value:integer")
+      generate("model", "point #{@model_name}_id:integer kind_id:integer value:integer")
       generate("model", "kind name:string")
       generate("model", "badge name:string kind_id:integer  #{(options[:points]) ? "points:integer" : ""} default:boolean")
     else
