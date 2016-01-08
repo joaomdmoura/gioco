@@ -29,11 +29,11 @@ namespace :gioco do
                     end\n"
 
       if arg_default
-        badge_string = badge_string + 'resources = #{@model_name.capitalize}.find(:all)\n'
+        badge_string = badge_string + 'resources = #{@model_name.capitalize}.all\n'
         badge_string = badge_string + "resources.each do |r|
         #{
         if options[:points] && options[:kinds]
-            "r.points  << Point.create({ :kind_id => kinds.id, :value => \'\#\{args.points\}\'})"
+            "r.points  << Point.create({ :kind_id => kind.id, :value => \'\#\{args.points\}\'})"
         elsif options[:points]
           "r.points = \'\#\{args.points\}\'"
         end
