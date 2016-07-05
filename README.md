@@ -221,7 +221,7 @@ The both defaults badge (noob) already was added to all users that we already ha
 Inside your application if you want to give 100 points to some user, inside your function you have to use the following method:
 
 ```ruby
-kind =  Kind.where(:name => "teacher")
+kind =  Kind.find_by(:name => "teacher")
 user = User.find(1)
 
 user.change_points({ points: 100, kind: kind.id })
