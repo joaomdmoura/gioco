@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.description = 'Gioco is a gem to easly implement gamification.'
   s.authors     = ["João Moura"]
   s.email       = 'joaomdmoura@gmail.com'
-  s.files       = Dir[ 'lib/*', 'lib/**/*', 'lib/**/**/*' ]
+  s.files       = Dir[ 'lib/*' ]
   s.homepage    = 'https://github.com/GiocoApp/gioco'
   s.license     = 'MIT'
   s.add_development_dependency 'rspec'
