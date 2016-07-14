@@ -17,7 +17,7 @@ With **Gioco** you are able to implement gamification logic such as badges, leve
 adding it in Gemfile:
 
 ```ruby
-gem 'gioco'
+gem "gioco"
 ```
 
 and running the bundler:
