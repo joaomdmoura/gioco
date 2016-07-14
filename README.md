@@ -1,6 +1,8 @@
 # gioco (current version - 2.0.0 RC)
 A **gamification** gem to Ruby on Rails applications that use Active Record.
 
+[![CircleCI](https://circleci.com/gh/joaomdmoura/gioco/tree/master.svg?style=svg)](https://circleci.com/gh/joaomdmoura/gioco/tree/master)
+
 **This is a new Working in Progress implementation, for the older version check the 1.1.1 branch**
 
 ## Description
