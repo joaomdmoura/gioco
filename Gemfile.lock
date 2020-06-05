@@ -119,7 +119,7 @@ GEM
       thread_safe (~> 0.1)
     websocket-driver (0.6.4)
       websocket-extensions (>= 0.1.0)
-    websocket-extensions (0.1.2)
+    websocket-extensions (0.1.5)
 
 PLATFORMS
   ruby
